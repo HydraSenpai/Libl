@@ -26,10 +26,6 @@ const UserSchema = mongoose.Schema({
     minLength: 6,
     select: false,
   },
-  dob: {
-    type: Date,
-    default: '',
-  },
 });
 
 UserSchema.pre('save', async function () {

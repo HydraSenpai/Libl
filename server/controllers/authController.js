@@ -1,6 +1,6 @@
+import CustomAPIError from '../errors/customAPIError.js';
 import User from '../models/User.js';
 import { StatusCodes } from 'http-status-codes';
-import CustomAPIError from '../errors/customAPIError.js';
 
 const register = async (req, res) => {
   //get all input sent from login page
