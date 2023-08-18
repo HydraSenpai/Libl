@@ -1,0 +1,512 @@
+const books = [
+  {
+    book_title: 'From Blood and Ash',
+    authors: {
+      author: {
+        first_name: 'Jennifer L.',
+        second_name: 'Armentrou',
+      },
+    },
+    book_description:
+      'Chosen from birth to usher in a new era, Poppy’s life has never been her own. The life of the Maiden is solitary. Never to be touched. Never to be looked upon. Never to be spoken to. Never to experience pleasure. Waiting for the day of her Ascension, she would rather be with the guards, fighting back the evil that took her family, than preparing to be found worthy by the gods. But the choice has never been hers.',
+    book_release_date: '25/12/1999',
+    isbn: '9781848869345',
+    audience: 'adults',
+    language: 'english',
+    genre: 'fantasy',
+    availability: 'available',
+    cover:
+      'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1588843906l/52861201._SY475_.jpg',
+    url: 'https://www.goodreads.com/book/show/52861201-from-blood-and-ash?from_choice=true',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'In Five Years',
+    authors: {
+      author: {
+        first_name: 'Rebecca',
+        second_name: 'Serl',
+      },
+    },
+    book_description:
+      "Where do you see yourself in five years? When Type-A Manhattan lawyer Dannie Kohan is asked this question at the most important interview of her career, she has a meticulously crafted answer at the ready. Later, after nailing her interview and accepting her boyfriend's marriage proposal, Dannie goes to sleep knowing she is right on track to achieve her five-year plan. But when she wakes up, she’s suddenly in a different apartment, with a different ring on her finger, and beside a very different man. The television news is on in the background, and she can just make out the scrolling date. It’s the same night—December 15—but 2025, five years in the future.",
+    book_release_date: '25/12/1999',
+    isbn: '9781982137441',
+    audience: 'adults',
+    language: 'english',
+    genre: 'romance',
+    availability: 'available',
+    cover:
+      'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1586399012l/50093704._SY475_.jpg',
+    url: 'https://www.goodreads.com/book/show/50093704-in-five-years?from_choice=true',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'Beach Read',
+    authors: {
+      author: {
+        first_name: 'Emily',
+        second_name: 'Henr',
+      },
+    },
+    book_description:
+      'LA romance writer who no longer believes in love and a literary writer stuck in a rut engage in a summer-long challenge that may just upend everything they believe about happily ever afters.',
+    book_release_date: '25/12/1999',
+    isbn: '9781984806734',
+    audience: 'adults',
+    language: 'english',
+    genre: 'romance',
+    availability: 'onloan',
+    cover:
+      'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1589881197l/52867387._SY475_.jpg',
+    url: 'https://www.goodreads.com/book/show/52867387-beach-read?from_choice=true',
+    rating: 2,
+    times_reserved: 1,
+  },
+  {
+    book_title: 'The Beast You Are: Stories',
+    authors: {
+      author: {
+        first_name: 'Paul',
+        second_name: 'Tremblay',
+      },
+    },
+    book_description:
+      'Paul Tremblay has won widespread acclaim for illuminating the dark horrors of the mind in novels and stories that push the boundaries of storytelling itself. The fifteen pieces in this brilliant collection,  The Beast You Are , are all monsters of a kind, ready to loudly (and lovingly) smash through your head and into your heart.',
+    book_release_date: '25/12/1999',
+    isbn: '9780063069961',
+    audience: 'adults',
+    language: 'english',
+    genre: 'Horror',
+    availability: 'available',
+    cover:
+      'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1669324638i/62966507.jpg',
+    url: 'https://www.goodreads.com/book/show/62966507-the-beast-you-are',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'The Splinter in the Sky',
+    authors: {
+      author: {
+        first_name: 'Kemi',
+        second_name: 'Ashing-Giwa',
+      },
+    },
+    book_description:
+      'A diverse, exciting debut space opera about a young tea expert who is taken as a political prisoner and recruited to spy on government officials—a role that may empower her to win back her nation’s independence—perfect for fans of N.K. Jemisin and Nnedi Okorafor.',
+    book_release_date: '25/12/1999',
+    isbn: '9781668008478',
+    audience: 'adults',
+    language: 'english',
+    genre: 'Fantasy',
+    availability: 'available',
+    cover:
+      'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1686761083i/62919382.jpg',
+    url: 'https://www.goodreads.com/book/show/62919382-the-splinter-in-the-sky',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 3',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '0962686003501',
+    audience: 'all',
+    language: 'english',
+    genre: 'non-fiction',
+    availability: 'nocopies',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 4',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '9599955664860',
+    audience: 'teens',
+    language: 'english',
+    genre: 'war',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 5',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '4179638540898',
+    audience: 'children',
+    language: 'english',
+    genre: 'sci-fi',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 6',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '2311724414549',
+    audience: 'children',
+    language: 'english',
+    genre: 'education',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 7',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '5492128082350',
+    audience: 'children',
+    language: 'english',
+    genre: 'fantasy',
+    availability: 'available',
+    rating: 1,
+    times_reserved: 1,
+  },
+  {
+    book_title: 'title 8',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '5088328707648',
+    audience: 'children',
+    language: 'english',
+    genre: 'fantasy',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 9',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '9774320551153',
+    audience: 'adults',
+    language: 'english',
+    genre: 'sci-fi',
+    availability: 'available',
+    rating: 4,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 10',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '2778347261151',
+    audience: 'adults',
+    language: 'english',
+    genre: 'romance',
+    availability: 'onloan',
+    rating: 5,
+    times_reserved: 3,
+  },
+  {
+    book_title: 'title 11',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '8456485980394',
+    audience: 'adults',
+    language: 'english',
+    genre: 'mystery',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 12',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '4661150532493',
+    audience: 'teens',
+    language: 'english',
+    genre: 'crime',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 13',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '9324212357626',
+    audience: 'teens',
+    language: 'english',
+    genre: 'romance',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 14',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '9443839555239',
+    audience: 'teens',
+    language: 'english',
+    genre: 'historical',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 15',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '4773561548002',
+    audience: 'all',
+    language: 'english',
+    genre: 'non-fiction',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 16',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '5833964133309',
+    audience: 'all',
+    language: 'english',
+    genre: 'non-fiction',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 17',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '7288357747715',
+    audience: 'all',
+    language: 'english',
+    genre: 'non-fiction',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 18',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '5567268180805',
+    audience: 'all',
+    language: 'english',
+    genre: 'non-fiction',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 19',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '5034322030848',
+    audience: 'children',
+    language: 'english',
+    genre: 'childrens',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 20',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '3185078995721',
+    audience: 'children',
+    language: 'english',
+    genre: 'childrens',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 21',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '4015784324690',
+    audience: 'children',
+    language: 'english',
+    genre: 'childrens',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+  {
+    book_title: 'title 22',
+    authors: {
+      author: {
+        first_name: 'firstname',
+        second_name: 'surname',
+        birth_year: '2002',
+      },
+    },
+    book_description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    book_release_date: '25/12/1999',
+    isbn: '7191155464961',
+    audience: 'children',
+    language: 'english',
+    genre: 'childrens',
+    availability: 'available',
+    rating: 2,
+    times_reserved: 5,
+  },
+];
