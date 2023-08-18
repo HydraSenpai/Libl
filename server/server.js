@@ -9,6 +9,9 @@ import connectDB from './db/connect.js';
 //routes
 import authRoutes from './routes/authRoutes.js';
 
+//middleware imports
+import notFound from './middleware/not-found.js';
+
 //middleware
 app.use(express.json());
 
@@ -18,6 +21,8 @@ app.get('/', (req, res) => {
   res.json({ msg: 'Welcome!' });
 });
 app.use('/api/v1/auth', authRoutes);
+
+//custom middleware
 
 const port = process.env.PORT || 5000;
 
