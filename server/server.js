@@ -6,6 +6,9 @@ dotenv.config();
 //database and auth
 import connectDB from './db/connect.js';
 
+//routes
+import authRoutes from './routes/authRoutes.js';
+
 //middleware
 app.use(express.json());
 
@@ -14,6 +17,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.json({ msg: 'Welcome!' });
 });
+app.use('/api/v1/auth', authRoutes);
 
 const port = process.env.PORT || 5000;
 
