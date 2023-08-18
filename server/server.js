@@ -11,6 +11,7 @@ import authRoutes from './routes/authRoutes.js';
 
 //middleware imports
 import notFound from './middleware/not-found.js';
+import ErrorHandler from './middleware/error-handler.js';
 
 //middleware
 app.use(express.json());
@@ -23,6 +24,8 @@ app.get('/', (req, res) => {
 app.use('/api/v1/auth', authRoutes);
 
 //custom middleware
+app.use(notFound);
+app.use(ErrorHandler);
 
 const port = process.env.PORT || 5000;
 
