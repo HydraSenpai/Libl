@@ -1,15 +1,15 @@
 const links = [
   {
     name: 'Home',
-    path: './',
+    path: '/',
   },
   {
     name: 'Catalogue',
-    path: './catalogue',
+    path: '/catalogue',
   },
   {
     name: 'Account',
-    path: './register',
+    path: '/register',
   },
 ];
 
