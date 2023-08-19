@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import BookSection from '../components/BookSection';
+import { Footer } from '../components/';
 
 const Home = () => {
   const books = [
@@ -58,6 +59,7 @@ const Home = () => {
       <Hero />
       <BookSection heading={'Trending'} books={books} />
       <BookSection heading={'Top 10'} books={books} />
+      <Footer />
     </>
   );
 };
