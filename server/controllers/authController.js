@@ -34,7 +34,24 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  res.send('login');
+  const { email, password } = req.body;
+  if (!email || !password) {
+    throw new CustomAPIError(
+      'Please provide all values',
+      StatusCodes.BAD_REQUEST
+    );
+  }
+  const user = await User.findOne({ email }).select('+password');
+  if (!user) {
+    throw new CustomAPIError('Invalid Credentials', StatusCodes.UNAUTHORIZED);
+  }
+  const isPassword = await user.comparePassword(password);
+  if (!isPassword) {
+    throw new CustomAPIError('Invalid Credentials', StatusCodes.UNAUTHORIZED);
+  }
+  const token = user.createJWT();
+  user.password = undefined;
+  res.status(StatusCodes.OK).json({ user, token });
 };
 
 export { register, login };
