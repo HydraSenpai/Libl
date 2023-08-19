@@ -1,7 +1,7 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import Hero from '../components/Hero'
-import BookSection from '../components/BookSection'
+import React from 'react';
+import Navbar from '../components/Navbar';
+import Hero from '../components/Hero';
+import BookSection from '../components/BookSection';
 
 const Home = () => {
   const books = [
@@ -51,7 +51,7 @@ const Home = () => {
       rating: 2,
       times_reserved: 5,
     },
-  ]
+  ];
   return (
     <>
       <Navbar />
@@ -59,7 +59,7 @@ const Home = () => {
       <BookSection heading={'Trending'} books={books} />
       <BookSection heading={'Top 10'} books={books} />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
