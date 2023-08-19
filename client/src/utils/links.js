@@ -1,7 +1,7 @@
 const links = [
   {
     name: 'Home',
-    path: './home',
+    path: './',
   },
   {
     name: 'Catalogue',
