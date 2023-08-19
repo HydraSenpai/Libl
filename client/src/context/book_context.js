@@ -1,28 +1,28 @@
 import React, { useContext, useEffect, useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import reducer from '../reducers/user_reducer';
+import reducer from '../reducers/book_reducer';
 
 const initialState = {};
 
-const UserContext = React.createContext();
+const BookContext = React.createContext();
 
-const UserProvider = ({ children }) => {
+const BookProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <UserContext.Provider
+    <BookContext.Provider
       value={{
         ...state,
       }}
     >
       {children}
-    </UserContext.Provider>
+    </BookContext.Provider>
   );
 };
 
-const useUserContext = () => {
-  return useContext(UserContext);
+const useBookContext = () => {
+  return useContext(BookContext);
 };
 
-export { UserProvider, useUserContext, initialState };
+export { BookProvider, useBookContext, initialState };
