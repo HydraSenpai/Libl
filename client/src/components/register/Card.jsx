@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import FormRow from './FormRow';
+import { useUserContext } from '../../context/user_context';
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
   name: '',
@@ -11,20 +13,29 @@ const initialState = {
 const Card = () => {
   const [userDetails, setUserDetails] = useState(initialState);
   const [login, setLogin] = useState(false);
-
+  const { register, user } = useUserContext();
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password, name } = userDetails;
     if (!email || !password || (!login && !name)) {
-      //show error or something
+      //show error
+      return;
     }
     if (login) {
       //login user
-    }
-    if (!login) {
-      //register user
+    } else {
+      register(userDetails);
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate('/profile');
+      }, 2000);
+    }
+  }, [user, navigate]);
 
   const handleChange = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });

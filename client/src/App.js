@@ -10,7 +10,7 @@ function App() {
         <Route path='/catalogue' element={<Catalogue />} />
         <Route path='/book/:id' element={<Book />} />
         {/* Profile route will be protected route */}
-        {/* <Route path='/profile' element={<Dashboard />} /> */}
+        <Route path='/profile' element={<Dashboard />} />
         <Route path='/register' element={<Login />} />
         <Route path='*' element={<Error />} />
       </Routes>
