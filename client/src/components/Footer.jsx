@@ -14,9 +14,15 @@ const Footer = () => {
         <div className='title'>
           <h2>Libl</h2>
           <div className='links'>
-            <FaFacebookSquare />
-            <FaInstagramSquare />
-            <FaTwitterSquare />
+            <Link to='/#' className='link'>
+              <FaFacebookSquare />
+            </Link>
+            <Link to='/#' className='link'>
+              <FaInstagramSquare />
+            </Link>
+            <Link to='/#' className='link'>
+              <FaTwitterSquare />
+            </Link>
           </div>
         </div>
         <div className='single-link'>
@@ -73,10 +79,11 @@ const Wrapper = styled.div`
     justify-content: space-around;
     padding-top: 30px;
     gap: 1em;
+    width: 20%;
   }
   .links {
     display: flex;
-    font-size: 2.5em;
+    font-size: 3em;
     gap: 0.1em;
   }
   .single-link {
@@ -91,5 +98,9 @@ const Wrapper = styled.div`
   .link {
     text-decoration: none;
     color: black;
+    transition: color 500ms;
+  }
+  .link:hover {
+    color: #808080;
   }
 `;
