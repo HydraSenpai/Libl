@@ -10,12 +10,16 @@ const Hero = () => {
     console.log(searchTerm)
   }
   return (
-    <div className='hero'>
+    <div className='hero-div'>
       <h1 className='hero-title'>Libl</h1>
+      <p className='hero-para'>
+        <i>All your Book needs</i>
+      </p>
       {/* image */}
-      <div className='search-bar'>
-        <Form onSubmit={submitHandler}>
+      <div className='hero-search-bar'>
+        <Form onSubmit={submitHandler} className='hero-search-form'>
           <input
+            className='hero-search-field'
             type='text'
             name='search-field'
             id='seach-field'
@@ -23,7 +27,7 @@ const Hero = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <Button type='submit' className='search-btn'>
+          <Button type='submit' className='hero-search-btn'>
             Search
           </Button>
         </Form>

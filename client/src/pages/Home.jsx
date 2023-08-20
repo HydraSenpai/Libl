@@ -18,8 +18,12 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
-      <Hero />
+      <div className='home-landing'>
+        <Navbar />
+        <div className='hero-container'>
+          <Hero />
+        </div>
+      </div>
       <BookSection heading={'Trending'} books={trendingBooks} />
       <BookSection heading={'Top 10'} books={top10Books} />
       <Footer />
