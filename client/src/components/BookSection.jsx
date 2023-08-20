@@ -22,7 +22,7 @@ const BookSection = ({ heading, books }) => {
           }}
         >
           {books.map((book) => (
-            <SplideSlide>
+            <SplideSlide key={book._id}>
               <BookCard key={book._id} book={book} />
             </SplideSlide>
           ))}
