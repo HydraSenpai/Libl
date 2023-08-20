@@ -5,9 +5,11 @@ import { Card } from '../components/register/';
 const Login = () => {
   return (
     <div>
-      <div class='full-page_footer'>
+      <div className='full-page_without-footer'>
         <Navbar />
-        <Card />
+        <div className='center' style={{ paddingTop: 2 + 'em' }}>
+          <Card />
+        </div>
       </div>
       <Footer />
     </div>
