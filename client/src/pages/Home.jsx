@@ -3,6 +3,8 @@ import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import BookSection from '../components/BookSection'
 import axios from 'axios'
+import { Footer } from '../components/';
+
 
 const Home = () => {
   
@@ -68,6 +70,7 @@ const Home = () => {
       <Hero />
       <BookSection heading={'Trending'} books={books} />
       <BookSection heading={'Top 10'} books={books} />
+      <Footer />
     </>
   );
 };
