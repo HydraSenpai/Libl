@@ -37,7 +37,7 @@ const Card = () => {
         style={!login ? { height: 540 + 'px' } : { height: 450 + 'px' }}
         onSubmit={handleSubmit}
       >
-        <h2>Create Account</h2>
+        <h2>{!login ? 'Create Account' : 'Login'}</h2>
         {!login && (
           <FormRow
             name='name'
