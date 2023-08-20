@@ -4,11 +4,17 @@
   box-sizing: border-box;
 }
 
+* {
+  padding: 0;
+  margin: 0;
+}
+
 /* fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Roboto+Condensed:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
 
 html {
   font-size: 100%;
+  font-family: 'Poppins', sans-serif;
 } /*16px*/
 
 :root {
@@ -44,8 +50,8 @@ html {
   --green-dark: #197248;
 
   /* fonts  */
-  --headingFont: 'Roboto Condensed', Sans-Serif;
-  --bodyFont: 'Cabin', Sans-Serif;
+  --headingFont: 'Poppins', Sans-Serif;
+  --bodyFont: 'Poppins', Sans-Serif;
   --small-text: 0.875rem;
   --extra-small-text: 0.7em;
   /* rest of the vars */
@@ -75,6 +81,7 @@ body {
   font-weight: 400;
   line-height: 1.75;
   color: var(--textColor);
+  font-family: 'Poppins', sans-serif;
 }
 
 p {
@@ -87,8 +94,8 @@ h2,
 h3,
 h4,
 h5 {
+  font-family: 'Poppins', sans-serif;
   margin: 0;
-  margin-bottom: 1.38rem;
   font-family: var(--headingFont);
   font-weight: 400;
   line-height: 1.3;
