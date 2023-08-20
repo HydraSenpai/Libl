@@ -309,6 +309,11 @@ ul {
   margin: 0 auto -180px;
 }
 
+.full-page_with-footer {
+  min-height: calc(100vh + 180px);
+  margin: 0 auto -180px;
+}
+
 @media screen and (min-width: 992px) {
   .coffee-info {
     text-align: left;
