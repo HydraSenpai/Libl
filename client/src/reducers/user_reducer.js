@@ -30,14 +30,12 @@ const user_reducer = (state, action) => {
       alertText: action.payload.msg,
     };
   }
-  const user_reducer = (state, action) => {
-    if (action.type === LOGIN_USER_BEGIN) {
-      return {
-        ...state,
-        isLoading: true,
-      };
-    }
-  };
+  if (action.type === LOGIN_USER_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
   if (action.type === LOGIN_USER_SUCCESS) {
     return {
       ...state,

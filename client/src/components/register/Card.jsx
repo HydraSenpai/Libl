@@ -13,7 +13,7 @@ const initialState = {
 const Card = () => {
   const [userDetails, setUserDetails] = useState(initialState);
   const [login, setLogin] = useState(false);
-  const { registerUser, user, loginUser } = useUserContext();
+  const { registerUser, user, loginUser, isLoading } = useUserContext();
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -72,14 +72,18 @@ const Card = () => {
           value={userDetails.password}
           handleChange={handleChange}
         />
-        <button className='btn' type='submit'>
-          {!login ? 'Register' : 'Login'}
+        <button className='btn' type='submit' disabled={isLoading}>
+          {!isLoading ? (!login ? 'Register' : 'Login') : 'Waiting...'}
         </button>
         <p>
           {!login
             ? 'Already have a library account? '
             : "Don't have a library account already? "}
-          <button className='login-btn' onClick={() => setLogin(!login)}>
+          <button
+            className='login-btn'
+            onClick={() => setLogin(!login)}
+            disabled={isLoading}
+          >
             {!login ? 'Login here' : 'Create account'}
           </button>
         </p>
