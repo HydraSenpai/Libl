@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -17,13 +16,18 @@ const Home = () => {
     })
   }, [])
 
-
   return (
     <>
-      <Navbar />
-      <Hero />
-      <BookSection heading={'Trending'} books={books} />
-      <BookSection heading={'Top 10'} books={books} />
+      <div className='home-landing'>
+        <Navbar />
+        <div className='hero-container'>
+          <Hero />
+        </div>
+      </div>
+      <div className='home-books-div'>
+        <BookSection heading={'Trending'} books={trendingBooks} />
+        <BookSection heading={'Top 10'} books={top10Books} />
+      </div>
 
       <Footer />
     </>

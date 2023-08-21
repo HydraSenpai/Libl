@@ -333,12 +333,7 @@ ul {
   }
 }
 
-.center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+/* HOME PAGE */
 
 .home-landing {
   height: 100vh;
