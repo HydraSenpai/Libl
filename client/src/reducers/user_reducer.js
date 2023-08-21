@@ -5,6 +5,7 @@ import {
   LOGIN_USER_BEGIN,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_ERROR,
+  LOGOUT_USER,
 } from '../actions/user_actions';
 import { initialState } from '../context/user_context';
 
@@ -49,6 +50,13 @@ const user_reducer = (state, action) => {
       ...state,
       isLoading: false,
       alertText: action.payload.msg,
+    };
+  }
+  if (action.type === LOGOUT_USER) {
+    return {
+      ...initialState,
+      user: null,
+      token: null,
     };
   }
   throw new Error(`No Matching "${action.type}" - action type`);

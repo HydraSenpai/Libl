@@ -9,6 +9,7 @@ import {
   LOGIN_USER_BEGIN,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_ERROR,
+  LOGOUT_USER,
 } from '../actions/user_actions';
 
 const user = localStorage.getItem('user');
@@ -29,6 +30,11 @@ const UserProvider = ({ children }) => {
   const addUserToLocalStorage = ({ user, token }) => {
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('token', token);
+  };
+
+  const removeUserFromLocalStorage = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
   };
 
   const registerUser = async (userData) => {
@@ -84,12 +90,19 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  const logoutUser = async () => {
+    removeUserFromLocalStorage();
+    dispatch({ type: LOGOUT_USER });
+    console.log(' logged out user');
+  };
+
   return (
     <UserContext.Provider
       value={{
         ...state,
         loginUser,
         registerUser,
+        logoutUser,
       }}
     >
       {children}

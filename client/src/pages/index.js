@@ -4,5 +4,6 @@ import Dashboard from './Dashboard';
 import Book from './Book';
 import Login from './Login';
 import Error from './Error';
+import ProtectedRoute from './ProtectedRoute';
 
-export { Home, Catalogue, Dashboard, Book, Login, Error };
+export { ProtectedRoute, Home, Catalogue, Dashboard, Book, Login, Error };

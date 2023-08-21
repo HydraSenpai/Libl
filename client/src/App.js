@@ -1,5 +1,13 @@
 import { useEffect } from 'react';
-import { Home, Catalogue, Dashboard, Book, Login, Error } from './pages/';
+import {
+  Home,
+  Catalogue,
+  Dashboard,
+  Book,
+  Login,
+  Error,
+  ProtectedRoute,
+} from './pages/';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -10,7 +18,14 @@ function App() {
         <Route path='/catalogue' element={<Catalogue />} />
         <Route path='/book/:id' element={<Book />} />
         {/* Profile route will be protected route */}
-        <Route path='/profile' element={<Dashboard />} />
+        <Route
+          path='/profile'
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route path='/register' element={<Login />} />
         <Route path='*' element={<Error />} />
       </Routes>

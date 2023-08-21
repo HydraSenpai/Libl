@@ -12,7 +12,7 @@ const initialState = {
 
 const Card = () => {
   const [userDetails, setUserDetails] = useState(initialState);
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(true);
   const { registerUser, user, loginUser, isLoading } = useUserContext();
   const navigate = useNavigate();
   const handleSubmit = (e) => {
