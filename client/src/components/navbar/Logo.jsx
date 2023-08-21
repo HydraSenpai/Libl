@@ -17,7 +17,7 @@ export default Logo;
 const Wrapper = styled.div`
   .logo {
     user-select: none;
-    color: #dd933c;
+    color: var(--primary-main);
     font-weight: 200;
   }
 `;

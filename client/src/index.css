@@ -19,6 +19,7 @@ html {
 
 :root {
   /* colors */
+  --primary-main: #dd933c;
   --primary-50: #dab2f1;
   --primary-100: #cc96eb;
   --primary-200: #be79e6;
@@ -48,6 +49,8 @@ html {
   --red-dark: #8f222b;
   --green-light: #afeacf;
   --green-dark: #197248;
+  --hover-black: #808080;
+  --hover-main: #b8711f;
 
   /* fonts  */
   --headingFont: 'Poppins', Sans-Serif;
@@ -155,18 +158,19 @@ ul {
 .btn {
   cursor: pointer;
   color: var(--white);
-  background: var(--primary-500);
+  background: var(--primary-main);
   border: transparent;
   border-radius: var(--borderRadius);
   letter-spacing: var(--letterSpacing);
-  padding: 0.375rem 0.75rem;
+  padding: 0.75rem 1.5rem;
   box-shadow: var(--shadow-2);
   transition: var(--transition);
   text-transform: capitalize;
   display: inline-block;
+  font-size: 1.25em;
 }
 .btn:hover {
-  background: var(--primary-700);
+  background: var(--hover-main);
   box-shadow: var(--shadow-3);
 }
 .btn-main {
@@ -304,6 +308,21 @@ ul {
   min-height: 100vh;
 }
 
+.full-page_footer {
+  min-height: 100vh;
+  margin: 0 auto -180px;
+}
+
+.full-page_without-footer {
+  min-height: calc(100vh - 180px);
+  margin: 0 auto;
+}
+
+.full-page_with-footer {
+  min-height: calc(100vh + 180px);
+  margin: 0 auto -180px;
+}
+
 @media screen and (min-width: 992px) {
   .coffee-info {
     text-align: left;
@@ -314,7 +333,12 @@ ul {
   }
 }
 
-/* HOME PAGE */
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .home-landing {
   height: 100vh;

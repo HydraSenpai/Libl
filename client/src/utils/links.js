@@ -8,9 +8,24 @@ const links = [
     path: '/catalogue',
   },
   {
-    name: 'Account',
+    name: 'Login',
     path: '/register',
   },
 ];
 
-export default links;
+const profileLinks = [
+  {
+    name: 'Home',
+    path: '/',
+  },
+  {
+    name: 'Catalogue',
+    path: '/catalogue',
+  },
+  {
+    name: 'Account',
+    path: '/profile',
+  },
+];
+
+export { links, profileLinks };
