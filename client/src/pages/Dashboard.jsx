@@ -5,6 +5,9 @@ const Dashboard = () => {
     <div>
       <div className='full-page_without-footer'>
         <Navbar />
+        <div className='center'>
+          <h1>Dashboard</h1>
+        </div>
       </div>
       <Footer />
     </div>
