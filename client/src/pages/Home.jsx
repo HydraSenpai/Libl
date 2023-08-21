@@ -24,8 +24,10 @@ const Home = () => {
           <Hero />
         </div>
       </div>
-      <BookSection heading={'Trending'} books={trendingBooks} />
-      <BookSection heading={'Top 10'} books={top10Books} />
+      <div className='home-books-div'>
+        <BookSection heading={'Trending'} books={trendingBooks} />
+        <BookSection heading={'Top 10'} books={top10Books} />
+      </div>
       <Footer />
     </>
   )

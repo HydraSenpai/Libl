@@ -7,7 +7,9 @@ const BookSection = ({ heading, books }) => {
   return (
     <div className='book-section'>
       <div className='book-sec-title'>
-        <h3 className='row-header'>{heading}</h3>
+        <h3 className='row-header'>
+          <i>{heading}</i>
+        </h3>
       </div>
 
       <div className='books-container'>
