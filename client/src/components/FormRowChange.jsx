@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { AiFillEdit } from 'react-icons/ai';
 import { FaCheck, FaX } from 'react-icons/fa6';
 import { useState } from 'react';
+import { useUserContext } from '../context/user_context';
 
 const FormRowChange = ({
   name,
@@ -11,6 +12,7 @@ const FormRowChange = ({
   active,
   handleActive,
 }) => {
+  const { isLoading } = useUserContext();
   return (
     <Wrapper>
       <div className='input-container'>
@@ -26,21 +28,23 @@ const FormRowChange = ({
           readOnly={active !== name}
         />
       </div>
-      <button
-        onClick={
-          active === name
-            ? () => handleActive(name, 'confirm')
-            : () => handleActive(name, 'change')
-        }
-        style={
-          active === name
-            ? { backgroundColor: 'var(--green-light)', marginLeft: 10 + 'em' }
-            : { marginLeft: 10 + 'em' }
-        }
-      >
-        {active === name ? <FaCheck /> : <AiFillEdit />}
-      </button>
-      {active === name && (
+      {!isLoading && (
+        <button
+          onClick={
+            active === name
+              ? () => handleActive(name, 'confirm')
+              : () => handleActive(name, 'change')
+          }
+          style={
+            active === name
+              ? { backgroundColor: 'var(--green-light)', marginLeft: 10 + 'em' }
+              : { marginLeft: 10 + 'em' }
+          }
+        >
+          {active === name ? <FaCheck /> : <AiFillEdit />}
+        </button>
+      )}
+      {active === name && !isLoading && (
         <button
           onClick={() => handleActive(name, 'cancel')}
           style={{

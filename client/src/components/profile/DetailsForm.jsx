@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import FormRowChange from '../FormRowChange';
 import { useUserContext } from '../../context/user_context';
@@ -6,7 +6,11 @@ import { useUserContext } from '../../context/user_context';
 const DetailsForm = ({ user }) => {
   const [active, setActive] = useState(null);
   const [newDetails, setNewDetails] = useState({ ...user });
-  const { editUser } = useUserContext();
+  const { editUser, isLoading } = useUserContext();
+
+  useEffect(() => {
+    setNewDetails({ ...user });
+  }, [user]);
 
   const handleChange = (e) => {
     setNewDetails({ ...newDetails, [e.target.name]: e.target.value });
