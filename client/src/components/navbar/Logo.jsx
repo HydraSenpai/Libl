@@ -1,18 +1,18 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const Logo = () => {
   return (
     <Wrapper>
-      <Link to='./'>
+      <Link to='/'>
         <h1 className='logo'>Libl</h1>
       </Link>
     </Wrapper>
-  );
-};
+  )
+}
 
-export default Logo;
+export default Logo
 
 const Wrapper = styled.div`
   .logo {
@@ -20,4 +20,4 @@ const Wrapper = styled.div`
     color: var(--primary-main);
     font-weight: 200;
   }
-`;
+`

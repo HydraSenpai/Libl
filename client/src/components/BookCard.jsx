@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom'
 const BookCard = ({ book }) => {
   return (
     <Card className='book-card'>
-      <Link to={`/book/:id/${book._id}`}>
+      <Link to={`/book/${book._id}`}>
         <Card.Body className='book-card-body'>
+          <Card.Img variant='top' src={book.cover} style={styles.cardImg} />
           <Card.Title as='div' className='book-card-title'>
             <strong>{book.book_title}</strong>
           </Card.Title>
@@ -17,6 +18,14 @@ const BookCard = ({ book }) => {
       </Link>
     </Card>
   )
+}
+
+const styles = {
+  cardImg: {
+    width: '150px',
+    height: '100%',
+    padding: '0.5rem',
+  },
 }
 
 export default BookCard
