@@ -68,7 +68,7 @@ const user_reducer = (state, action) => {
       isLoading: true,
     };
   }
-  if (action.type === LOGIN_USER_SUCCESS) {
+  if (action.type === UPDATE_USER_SUCCESS) {
     return {
       ...state,
       user: action.payload.user,
@@ -76,7 +76,7 @@ const user_reducer = (state, action) => {
       isLoading: false,
     };
   }
-  if (action.type === LOGIN_USER_ERROR) {
+  if (action.type === UPDATE_USER_ERROR) {
     return {
       ...state,
       isLoading: false,

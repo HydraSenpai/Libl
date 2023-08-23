@@ -107,6 +107,7 @@ const UserProvider = ({ children }) => {
   };
 
   const editUser = async (userData) => {
+    console.log(userData);
     //start user update process
     dispatch({ type: UPDATE_USER_BEGIN });
     try {
