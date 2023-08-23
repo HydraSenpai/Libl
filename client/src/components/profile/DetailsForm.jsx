@@ -52,6 +52,8 @@ const DetailsForm = ({ user }) => {
 
   return (
     <Wrapper>
+      <h2>Account details</h2>
+      {isLoading && <h3>Updating account...</h3>}
       <FormRowChange
         name='name'
         type='text'
@@ -79,4 +81,12 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  display: flex;
+  align-items: center;
+  h2 {
+    margin-bottom: 0.5em;
+  }
+  h3 {
+    margin-bottom: 1em;
+  }
 `;
