@@ -10,6 +10,9 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_ERROR,
   LOGOUT_USER,
+  UPDATE_USER_BEGIN,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_ERROR,
 } from '../actions/user_actions';
 
 const user = localStorage.getItem('user');
@@ -26,6 +29,13 @@ const UserContext = React.createContext();
 
 const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const authFetch = axios.create({
+    baseURL: '/api/v1',
+    headers: {
+      Authorization: `Bearer ${state.token}`,
+    },
+  });
 
   const addUserToLocalStorage = ({ user, token }) => {
     localStorage.setItem('user', JSON.stringify(user));
@@ -96,6 +106,29 @@ const UserProvider = ({ children }) => {
     console.log(' logged out user');
   };
 
+  const editUser = async (userData) => {
+    //start user update process
+    dispatch({ type: UPDATE_USER_BEGIN });
+    try {
+      const response = await authFetch.patch('/auth/update', userData);
+      dispatch({
+        type: UPDATE_USER_SUCCESS,
+        payload: { user: response.data.user },
+      });
+      addUserToLocalStorage({
+        user: response.data.user,
+        token: state.token,
+      });
+      console.log('success');
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: UPDATE_USER_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -103,6 +136,7 @@ const UserProvider = ({ children }) => {
         loginUser,
         registerUser,
         logoutUser,
+        editUser,
       }}
     >
       {children}

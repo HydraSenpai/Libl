@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import FormRowChange from '../FormRowChange';
+import { useUserContext } from '../../context/user_context';
 
 const DetailsForm = ({ user }) => {
   const [active, setActive] = useState(null);
   const [newDetails, setNewDetails] = useState({ ...user });
+  const { editUser } = useUserContext();
 
   const handleChange = (e) => {
     setNewDetails({ ...newDetails, [e.target.name]: e.target.value });
@@ -20,6 +22,7 @@ const DetailsForm = ({ user }) => {
     //if option is conform edit then update details in db and close editing
     if (option === 'confirm') {
       //change detail
+      editUser(newDetails);
       setNewDetails({ ...user });
       setActive(null);
       return;
