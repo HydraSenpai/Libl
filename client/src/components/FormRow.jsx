@@ -1,8 +1,15 @@
 import styled from 'styled-components';
 
-const FormRow = ({ name, type, labelText, handleChange, value }) => {
+const FormRow = ({
+  name,
+  type,
+  labelText,
+  handleChange,
+  value,
+  vertical = true,
+}) => {
   return (
-    <Wrapper>
+    <Wrapper style={!vertical ? { flexDirection: 'row', gap: 1 + 'em' } : null}>
       <label htmlFor={name} className='form-labels'>
         {labelText}
       </label>

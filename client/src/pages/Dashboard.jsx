@@ -4,6 +4,7 @@ import { useUserContext } from '../context/user_context';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import profile from '../assets/profileblank.png';
+import DetailsForm from '../components/profile/DetailsForm';
 
 const Dashboard = () => {
   const { logoutUser, user } = useUserContext();
@@ -55,7 +56,9 @@ const Dashboard = () => {
           {/* MAIN SECTION */}
           <div className='bottom-section'>
             {displayOption === 'details' && (
-              <div className='details'>details</div>
+              <div className='details'>
+                <DetailsForm />
+              </div>
             )}
             {displayOption === 'borrowing' && (
               <div className='borrowing'>
@@ -63,7 +66,9 @@ const Dashboard = () => {
               </div>
             )}
             {displayOption === 'reserved' && (
-              <div className='reserved'>reserved</div>
+              <div className='reserved'>
+                <Table />
+              </div>
             )}
           </div>
         </div>
@@ -96,7 +101,7 @@ const Wrapper = styled.div`
     margin: 1em 0em;
     gap: 1em;
   }
-  .btn {
+  .buttons > .btn {
     width: 200px;
     border-radius: 50px;
   }
