@@ -5,6 +5,10 @@ import {
   LOGIN_USER_BEGIN,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_ERROR,
+  LOGOUT_USER,
+  UPDATE_USER_BEGIN,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_ERROR,
 } from '../actions/user_actions';
 import { initialState } from '../context/user_context';
 
@@ -45,6 +49,33 @@ const user_reducer = (state, action) => {
     };
   }
   if (action.type === LOGIN_USER_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      alertText: action.payload.msg,
+    };
+  }
+  if (action.type === LOGOUT_USER) {
+    return {
+      ...initialState,
+      user: null,
+      token: null,
+    };
+  }
+  if (action.type === UPDATE_USER_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === UPDATE_USER_SUCCESS) {
+    return {
+      ...state,
+      user: action.payload.user,
+      isLoading: false,
+    };
+  }
+  if (action.type === UPDATE_USER_ERROR) {
     return {
       ...state,
       isLoading: false,

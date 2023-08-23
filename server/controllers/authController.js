@@ -54,4 +54,22 @@ const login = async (req, res) => {
   res.status(StatusCodes.OK).json({ user, token });
 };
 
-export { register, login };
+const updateUser = async (req, res) => {
+  console.log(req.body);
+  const { name, email, _id } = req.body;
+  if (!name || !email || !_id) {
+    throw new CustomAPIError(
+      'Please provide all values',
+      StatusCodes.BAD_REQUEST
+    );
+  }
+  //find user by id and update necessary fields
+  let user = await User.findByIdAndUpdate(
+    _id,
+    { name: name, email: email },
+    { new: true }
+  );
+  res.status(StatusCodes.OK).json({ user });
+};
+
+export { register, login, updateUser };

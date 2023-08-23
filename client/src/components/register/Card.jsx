@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import FormRow from './FormRow';
+import FormRow from '../FormRow';
 import { useUserContext } from '../../context/user_context';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ const initialState = {
 
 const Card = () => {
   const [userDetails, setUserDetails] = useState(initialState);
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(true);
   const { registerUser, user, loginUser, isLoading } = useUserContext();
   const navigate = useNavigate();
   const handleSubmit = (e) => {

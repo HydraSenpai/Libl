@@ -47,7 +47,7 @@ html {
   --white: #fff;
   --red-light: #fa6a76;
   --red-dark: #8f222b;
-  --green-light: #afeacf;
+  --green-light: #60e2a7;
   --green-dark: #197248;
   --hover-black: #808080;
   --hover-main: #b8711f;
@@ -188,6 +188,9 @@ ul {
   font-size: 1.25rem;
   padding: 0.5rem 1.25rem;
 }
+.btn-accent {
+  background-color: var(--black);
+}
 .btn-danger {
   background: var(--red-light);
   color: var(--red-dark);
@@ -218,7 +221,6 @@ ul {
 
 .form {
   width: 60vw;
-
   background: var(--white);
   border-radius: var(--borderRadius);
   box-shadow: var(--shadow-2);
@@ -229,6 +231,19 @@ ul {
 .form:hover {
   box-shadow: var(--shadow-4);
 }
+
+.form-inputs {
+  border-radius: 5px;
+  width: 100%;
+  border: none;
+  height: 40px;
+  padding: 0.25em 0.5em;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2em;
+  font-weight: 300;
+  box-shadow: var(--shadow-2);
+}
+
 .form-label {
   display: block;
   font-size: var(--smallText);
@@ -304,6 +319,11 @@ ul {
   max-width: var(--max-width);
   margin: 0 auto;
 }
+
+.nav-padding {
+  margin-top: 50px;
+}
+
 .full-page {
   min-height: 100vh;
 }
