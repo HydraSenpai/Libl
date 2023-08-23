@@ -2,13 +2,6 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const styles = {
-  cardImg: {
-    width: '130px',
-    height: '100%',
-  },
-}
-
 const BookCard = ({ book }) => {
   return (
     <Card className='book-card'>
@@ -25,6 +18,14 @@ const BookCard = ({ book }) => {
       </Link>
     </Card>
   )
+}
+
+const styles = {
+  cardImg: {
+    width: '150px',
+    height: '100%',
+    padding: '0.5rem',
+  },
 }
 
 export default BookCard
