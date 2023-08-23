@@ -57,7 +57,7 @@ const Dashboard = () => {
           <div className='bottom-section'>
             {displayOption === 'details' && (
               <div className='details'>
-                <DetailsForm />
+                <DetailsForm user={user} />
               </div>
             )}
             {displayOption === 'borrowing' && (

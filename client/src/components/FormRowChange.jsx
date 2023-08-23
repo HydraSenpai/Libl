@@ -1,9 +1,16 @@
 import styled from 'styled-components';
 import { AiFillEdit } from 'react-icons/ai';
+import { FaCheck, FaX } from 'react-icons/fa6';
 import { useState } from 'react';
 
-const FormRow = ({ name, type, handleChange, value }) => {
-  const [active, setActive] = useState(false);
+const FormRowChange = ({
+  name,
+  type,
+  handleChange,
+  value,
+  active,
+  handleActive,
+}) => {
   return (
     <Wrapper>
       <div className='input-container'>
@@ -11,22 +18,39 @@ const FormRow = ({ name, type, handleChange, value }) => {
         <input
           type={type}
           value={value}
-          className={active ? 'form-inputs' : 'form-inputs disabled-input'}
+          className={
+            active === name ? 'form-inputs' : 'form-inputs disabled-input'
+          }
           name={name}
           onChange={handleChange}
+          readOnly={active !== name}
         />
       </div>
       <button
-        onClick={() => setActive(!active)}
-        style={active ? { backgroundColor: 'var(--primary-main)' } : null}
+        onClick={() => handleActive(name, 'confirm')}
+        style={
+          active === name
+            ? { backgroundColor: 'var(--green-light)', marginLeft: 10 + 'em' }
+            : { marginLeft: 10 + 'em' }
+        }
       >
-        <AiFillEdit />
+        {active === name ? <FaCheck /> : <AiFillEdit />}
       </button>
+      {active === name && (
+        <button
+          onClick={() => handleActive(name, 'cancel')}
+          style={{
+            backgroundColor: 'var(--red-light)',
+          }}
+        >
+          <FaX />
+        </button>
+      )}
     </Wrapper>
   );
 };
 
-export default FormRow;
+export default FormRowChange;
 
 const Wrapper = styled.div`
   padding-bottom: 0;
@@ -35,7 +59,6 @@ const Wrapper = styled.div`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  gap: 10em;
   .input-container {
     display: flex;
     flex-direction: row;
@@ -73,5 +96,9 @@ const Wrapper = styled.div`
   .disabled-input {
     background-color: transparent;
     box-shadow: none;
+    border: none;
+  }
+  .disabled-input:focus {
+    outline: none;
   }
 `;
