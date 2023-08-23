@@ -11,12 +11,29 @@ const DetailsForm = ({ user }) => {
   };
 
   const handleActive = (name, option) => {
+    //if option is cancel edit then reset details to old values and close editing
     if (option === 'cancel') {
       setNewDetails({ ...user });
       setActive(null);
       return;
     }
-    setActive(name);
+    //if option is conform edit then update details in db and close editing
+    if (option === 'confirm') {
+      //change detail
+      setNewDetails({ ...user });
+      setActive(null);
+      return;
+    }
+    //bring up edit interface if no other field is being edited
+    if (option === 'change' && active === null) {
+      setActive(name);
+      return;
+    }
+    //other option is being edited so don't allow user to change
+    if (option === 'change' && active !== null) {
+      return;
+    }
+    return;
   };
 
   return (

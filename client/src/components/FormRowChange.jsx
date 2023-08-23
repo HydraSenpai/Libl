@@ -27,7 +27,11 @@ const FormRowChange = ({
         />
       </div>
       <button
-        onClick={() => handleActive(name, 'confirm')}
+        onClick={
+          active === name
+            ? () => handleActive(name, 'confirm')
+            : () => handleActive(name, 'change')
+        }
         style={
           active === name
             ? { backgroundColor: 'var(--green-light)', marginLeft: 10 + 'em' }
