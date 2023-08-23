@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import FormRowChange from '../FormRowChange';
 import { useUserContext } from '../../context/user_context';
+import validator from 'email-validator';
 
 const DetailsForm = ({ user }) => {
   const [active, setActive] = useState(null);
@@ -27,7 +28,14 @@ const DetailsForm = ({ user }) => {
     if (option === 'confirm') {
       //if user hasn't changed the value just return
       //WILL NEED MORE VALIDATION HERE SOON!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      if (user[active] === newDetails[active].trim()) {
+      if (
+        user[active] === newDetails[active].trim() ||
+        newDetails[active] === '' ||
+        newDetails[active] === null ||
+        (active === 'email' && !validator.validate(newDetails.email))
+      ) {
+        console.log('not allowed');
+        setNewDetails({ ...user });
         setActive(null);
         return;
       } else {
