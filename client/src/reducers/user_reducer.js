@@ -72,7 +72,6 @@ const user_reducer = (state, action) => {
     return {
       ...state,
       user: action.payload.user,
-      token: action.payload.token,
       isLoading: false,
     };
   }

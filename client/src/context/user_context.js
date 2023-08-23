@@ -83,7 +83,7 @@ const UserProvider = ({ children }) => {
       //if user exists then user and token is returned by server
       dispatch({
         type: LOGIN_USER_SUCCESS,
-        payload: { user: response.data.user, token: response.data.token },
+        payload: { user: response.data.user, token: response.data.user.token },
       });
       //this data is also added to local storage so user can keep access to webpage through site reload
       addUserToLocalStorage({

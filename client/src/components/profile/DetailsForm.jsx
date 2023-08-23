@@ -25,22 +25,18 @@ const DetailsForm = ({ user }) => {
     }
     //if option is conform edit then update details in db and close editing
     if (option === 'confirm') {
-      console.log(active);
       //if user hasn't changed the value just return
       //WILL NEED MORE VALIDATION HERE SOON!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       if (user[active] === newDetails[active].trim()) {
-        console.log('nothing changed');
         setActive(null);
         return;
       } else {
-        console.log('changed');
         //change user to new details entered
         editUser(newDetails);
         setNewDetails({ ...user });
         setActive(null);
         return;
       }
-      return;
     }
     //bring up edit interface if no other field is being edited
     if (option === 'change' && active === null) {

@@ -37,8 +37,8 @@ const FormRowChange = ({
           }
           style={
             active === name
-              ? { backgroundColor: 'var(--green-light)', marginLeft: 10 + 'em' }
-              : { marginLeft: 10 + 'em' }
+              ? { backgroundColor: 'var(--green-light)', marginLeft: 3 + 'em' }
+              : { marginLeft: 3 + 'em' }
           }
         >
           {active === name ? <FaCheck /> : <AiFillEdit />}
@@ -76,9 +76,12 @@ const Wrapper = styled.div`
   p {
     text-transform: capitalize;
     font-size: 1.2em;
-    width: 200px;
+    width: 150px;
     max-width: 200px;
     text-overflow: ellipsis;
+  }
+  .form-inputs {
+    width: 450px;
   }
   p,
   button {
