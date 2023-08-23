@@ -78,6 +78,7 @@ const DetailsForm = ({ user }) => {
         active={active}
         handleActive={handleActive}
       />
+      <button className='btn'>Reset Password(WIP)</button>
     </Wrapper>
   );
 };
@@ -96,5 +97,8 @@ const Wrapper = styled.div`
   }
   h3 {
     margin-bottom: 1em;
+  }
+  .btn {
+    margin-top: 1em;
   }
 `;

@@ -1,19 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Table = () => {
+const BorrowingTable = () => {
+  const ReturnBTN = () => {
+    return <button className='return-btn'>Return</button>;
+  };
+
   const bookDetails = [
     {
       name: 'random',
       date: '10/06/2002',
-      daysBorrowed: 50,
-      returnBtn: 'return',
+      availability: 'available',
     },
     {
       name: 'random 2',
       date: '4/06/2002',
-      daysBorrowed: 2,
-      returnBtn: 'return',
+      availability: 'onloan',
     },
   ];
   if (!bookDetails || bookDetails.length === 0) {
@@ -29,18 +31,16 @@ const Table = () => {
         <tbody>
           <tr>
             <th>Book Name</th>
-            <th>Date Taken out</th>
-            <th>Days Borrowed</th>
-            <th>Return</th>
+            <th>Date Reserved</th>
+            <th>Availability</th>
           </tr>
           {bookDetails.map((details, index) => {
-            const { name, date, daysBorrowed, returnBtn } = details;
+            const { name, date, availability } = details;
             return (
               <tr className='light' key={index}>
                 <td>{name}</td>
                 <td>{date}</td>
-                <td>{daysBorrowed}</td>
-                <td>{returnBtn}</td>
+                <td>{availability}</td>
               </tr>
             );
           })}
@@ -50,7 +50,7 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default BorrowingTable;
 
 const Wrapper = styled.div`
   table {
@@ -78,5 +78,16 @@ const Wrapper = styled.div`
   }
   .light:hover {
     background-color: var(--grey-100);
+  }
+  .return-btn {
+    border: none;
+    background-color: var(--primary-main);
+    font-size: 0.75em;
+    padding: 0.5em 0.75em;
+    border-radius: 10px;
+    transition: all 250ms;
+  }
+  .return-btn:hover {
+    background-color: var(--hover-main);
   }
 `;

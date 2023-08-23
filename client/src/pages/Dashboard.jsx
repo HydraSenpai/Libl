@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Navbar, Footer, Table } from '../components/';
+import { Navbar, Footer } from '../components/';
 import { useUserContext } from '../context/user_context';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import profile from '../assets/profileblank.png';
 import DetailsForm from '../components/profile/DetailsForm';
+import Table from '../components/profile/BorrowingTable';
+import ReservedTable from '../components/profile/ReservedTable';
 
 const Dashboard = () => {
   const { logoutUser, user } = useUserContext();
@@ -67,7 +69,7 @@ const Dashboard = () => {
             )}
             {displayOption === 'reserved' && (
               <div className='reserved'>
-                <Table />
+                <ReservedTable />
               </div>
             )}
           </div>
