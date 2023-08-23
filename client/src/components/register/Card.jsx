@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import FormRow from '../FormRow';
+import { FormRow } from '../index';
 import { useUserContext } from '../../context/user_context';
 import { useNavigate } from 'react-router-dom';
 

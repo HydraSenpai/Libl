@@ -88,7 +88,7 @@ const Wrapper = styled.div`
   }
   .top-section {
     height: 200px;
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -100,6 +100,7 @@ const Wrapper = styled.div`
   }
   .buttons {
     display: flex;
+    justify-content: center;
     margin: 1em 0em;
     gap: 1em;
   }
@@ -109,7 +110,7 @@ const Wrapper = styled.div`
   }
   .bottom-section {
     min-height: 1000px;
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
