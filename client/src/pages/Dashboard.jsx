@@ -21,9 +21,9 @@ const Dashboard = () => {
 
   return (
     <Wrapper>
-      <div className='full-page_without-footer'>
+      <div className='full-page_footer'>
         <Navbar />
-        <div className='center nav-padding'>
+        <div className='center'>
           {/* TOP SECTION */}
           <div className='top-section'>
             <img src={profile} className='profile' />
@@ -83,9 +83,11 @@ const Dashboard = () => {
 export default Dashboard;
 
 const Wrapper = styled.div`
-  .full-page_without-footer {
-    height: 180vh;
-  }
+  /* .full-page_footer {
+    min-height: 100vh;
+    height: 100vh;
+    margin: 0 auto;
+  } */
   .top-section {
     height: 200px;
     width: 100%;
@@ -109,7 +111,6 @@ const Wrapper = styled.div`
     border-radius: 50px;
   }
   .bottom-section {
-    min-height: 1000px;
     width: 100%;
     display: flex;
     flex-direction: column;
