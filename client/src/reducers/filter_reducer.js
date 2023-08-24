@@ -34,6 +34,55 @@ const filter_reducer = (state, action) => {
     }
     return { ...state, filteredBooks: tempBooks };
   }
+  if (action.type === UPDATE_FILTERS) {
+    const { name, value } = action.payload;
+    return { ...state, filters: { ...state.filters, [name]: value } };
+  }
+  if (action.type === FILTER_BOOKS) {
+    const { allBooks } = state;
+    const { title, author, genre, audience, language } = state.filters;
+    let tempBooks = [...allBooks];
+    // FILTER JUST TITLE
+    if (title) {
+      let titleFilteredBooks = tempBooks.filter((book) =>
+        // can change it so it only filters with start of text (preference)
+        // book.book_title.toLowerCase().includes(title.toLowerCase())
+        book.book_title.toLowerCase().includes(title.toLowerCase())
+      );
+      let authorFilteredBooks = tempBooks.filter((book) =>
+        book.authors.author.first_name
+          .toLowerCase()
+          .includes(title.toLowerCase())
+      );
+      tempBooks = titleFilteredBooks.concat(authorFilteredBooks);
+      tempBooks = [...new Set(tempBooks)];
+    }
+    // FILTER GENRE
+    if (genre !== 'all') {
+      tempBooks = tempBooks.filter((book) => book.genre === genre);
+    }
+    // FILTER LANGUAGE
+    if (language !== 'all') {
+      tempBooks = tempBooks.filter((book) => book.language === language);
+    }
+    // FILTER AUDIENCE
+    if (audience !== 'all') {
+      tempBooks = tempBooks.filter((book) => book.audience === audience);
+    }
+    return { ...state, filteredBooks: tempBooks };
+  }
+  if (action.type === CLEAR_FILTERS) {
+    return {
+      ...state,
+      filters: {
+        title: '',
+        author: '',
+        genre: 'all',
+        audience: 'all',
+        language: 'all',
+      },
+    };
+  }
   throw new Error(`No Matching "${action.type}" - action type`);
 };
 

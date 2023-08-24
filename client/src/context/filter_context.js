@@ -16,8 +16,8 @@ const initialState = {
   allBooks: [],
   sort: 'name-a',
   filters: {
-    name: '',
-    author: 'all',
+    title: '',
+    author: '',
     genre: 'all',
     audience: 'all',
     language: 'all',
@@ -35,12 +35,26 @@ const FilterProvider = ({ children }) => {
   }, [books]);
 
   useEffect(() => {
+    dispatch({ type: FILTER_BOOKS });
     dispatch({ type: SORT_BOOKS });
-  }, [books, state.sort]);
+  }, [books, state.sort, state.filters]);
 
   const updateSort = (e) => {
     const value = e.target.value;
     dispatch({ type: UPDATE_SORT, payload: value });
+  };
+
+  const updateFilters = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    if (name === 'genre' || name === 'audience' || name === 'language') {
+      value = e.target.textContent;
+    }
+    dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
+  };
+
+  const clearFilters = () => {
+    dispatch({ type: CLEAR_FILTERS });
   };
 
   return (
@@ -48,6 +62,8 @@ const FilterProvider = ({ children }) => {
       value={{
         ...state,
         updateSort,
+        updateFilters,
+        clearFilters,
       }}
     >
       {children}
