@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import styled from 'styled-components';
+import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const BookCard = ({ book }) => {
   return (
@@ -20,8 +20,8 @@ const BookCard = ({ book }) => {
         </Link>
       </Card>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   .book-card {
@@ -62,6 +62,6 @@ const Wrapper = styled.div`
     height: 100%;
     padding: 0.5rem;
   }
-`
+`;
 
-export default BookCard
+export default BookCard;
