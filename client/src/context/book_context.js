@@ -13,7 +13,7 @@ import {
 import { useUserContext } from '../context/user_context';
 
 const initialState = {
-  books: {},
+  books: [],
   singleBook: {},
   totalBooks: 0,
   isLoading: true,
@@ -69,6 +69,7 @@ const BookProvider = ({ children }) => {
       value={{
         ...state,
         getAllBooks,
+        getSingleBook,
       }}
     >
       {children}
