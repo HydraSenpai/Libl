@@ -6,11 +6,15 @@ import {
   GET_BOOKS_BEGIN,
   GET_BOOKS_SUCCESS,
   GET_BOOKS_ERROR,
+  GET_SINGLE_BOOK_BEGIN,
+  GET_SINGLE_BOOK_SUCCESS,
+  GET_SINGLE_BOOK_ERROR,
 } from '../actions/book_actions';
 import { useUserContext } from '../context/user_context';
 
 const initialState = {
   books: {},
+  singleBook: {},
   totalBooks: 0,
   isLoading: true,
 };
@@ -44,6 +48,19 @@ const BookProvider = ({ children }) => {
       dispatch({ type: GET_BOOKS_ERROR });
       console.log(error);
       logoutUser();
+    }
+  };
+
+  const getSingleBook = async (id) => {
+    dispatch({ type: GET_SINGLE_BOOK_BEGIN });
+    let url = `/books/${id}`;
+    try {
+      const { data } = await authFetch.get(url);
+      const { book } = data;
+      dispatch({ type: GET_SINGLE_BOOK_SUCCESS, payload: { book } });
+    } catch (error) {
+      dispatch({ type: GET_SINGLE_BOOK_ERROR });
+      console.log(error);
     }
   };
 
