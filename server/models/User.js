@@ -27,8 +27,13 @@ const UserSchema = mongoose.Schema({
     select: false,
   },
   booksReserved: {
-    books: { type: Array, default: [] },
-    dateReserved: { type: Date },
+    type: Array,
+    books: [
+      {
+        book: { type: mongoose.Schema.Types.ObjectId, required: true },
+        dateReserved: { type: Date, required: true },
+      },
+    ],
   },
 })
 
