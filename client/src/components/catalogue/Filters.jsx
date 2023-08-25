@@ -23,7 +23,7 @@ const Filters = () => {
             type='text'
             name='title'
             className='form-inputs'
-            placeholder='Search title'
+            placeholder='Search title or author'
             value={title}
             onChange={updateFilters}
           />
