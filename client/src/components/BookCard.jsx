@@ -1,7 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import styled from 'styled-components'
+import moment from 'moment'
+import { Card } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 const BookCard = ({ book }) => {
   return (
@@ -11,17 +12,17 @@ const BookCard = ({ book }) => {
           <Card.Body className='book-card-body'>
             <Card.Img variant='top' src={book.cover} className='cardImg' />
             <Card.Title as='div' className='book-card-title'>
-              <strong>{book.book_title}</strong>
+              <strong>{book.bookTitle}</strong>
             </Card.Title>
             <Card.Text as='p' className='book-card-para'>
-              {book.book_release_date}
+              {moment(book.bookReleaseDate).utc().format('YYYY-MM-DD')}
             </Card.Text>
           </Card.Body>
         </Link>
       </Card>
     </Wrapper>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   .book-card {
@@ -53,7 +54,7 @@ const Wrapper = styled.div`
   }
 
   .book-card-para {
-    color: lightgray;
+    color: gray;
     font-weight: 200;
   }
 
@@ -62,6 +63,6 @@ const Wrapper = styled.div`
     height: 100%;
     padding: 0.5rem;
   }
-`;
+`
 
-export default BookCard;
+export default BookCard

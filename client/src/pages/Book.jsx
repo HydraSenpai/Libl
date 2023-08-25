@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
+import moment from 'moment'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import BookSection from '../components/BookSection'
@@ -11,7 +12,6 @@ import Rating from '../components/Rating'
 const Book = () => {
   const { id: bookId } = useParams()
   const [book, setBook] = useState([])
-  const [author, setAuthor] = useState('')
   const [similarBooks, setSimilarBooks] = useState([])
 
   const [availabilityCol, setAvailabiltyCol] = useState('red')
@@ -25,11 +25,6 @@ const Book = () => {
         .get(`http://localhost:4000/api/v1/books/${bookId}`)
         .then((response) => {
           setBook(response.data.book)
-          setAuthor(
-            response.data.book.authors.author.first_name +
-              ' ' +
-              response.data.book.authors.author.second_name
-          )
         })
 
       axios.get('http://localhost:4000/api/v1/books').then((response) => {
@@ -64,16 +59,16 @@ const Book = () => {
         <div className='book-details'>
           <h3>{book.book_title}</h3>
           <p>
-            <strong>Author: </strong> {author}
+            <strong>Author: </strong> {book.author}
           </p>
           <p>
             <strong>Release Date: </strong>
-            {book.book_release_date}
+            {moment(book.bookReleaseDate).utc().format('YYYY-MM-DD')}
           </p>
           <p>
             <Rating
               value={book.rating}
-              text={`Resereved ${book.times_reserved} times`}
+              text={`Resereved ${book.timesReserved} times`}
             />
           </p>
         </div>
@@ -83,7 +78,7 @@ const Book = () => {
         <div className='summary-text'>
           <div className='summary-header'>
             <h4>Description:</h4>
-            <p>{book.book_description}</p>
+            <p>{book.bookDescription}</p>
           </div>
 
           <div className='details-div'>
@@ -91,11 +86,11 @@ const Book = () => {
             <ul className='details-list'>
               <li>
                 <strong>Author: </strong>
-                {author}
+                {book.author}
               </li>
               <li>
                 <strong>Release Date: </strong>
-                {book.book_release_date}
+                {moment(book.bookReleaseDate).utc().format('YYYY-MM-DD')}
               </li>
               <li>
                 <strong>ISBN: </strong>
@@ -120,7 +115,7 @@ const Book = () => {
           <Card className='availabilty-card'>
             <Card.Body>
               <Card.Title as='div' className='availabilty-card-title'>
-                {book.book_title}
+                {book.bookTitle}
               </Card.Title>
               <Card.Text as='div'>
                 <Button
