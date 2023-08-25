@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 const BookSchema = mongoose.Schema({
   bookTitle: {
@@ -9,13 +9,13 @@ const BookSchema = mongoose.Schema({
     trim: true,
   },
   author: {
-    type: Object,
+    type: String,
     required: [true, 'Please provide an author'],
     maxLength: 100,
   },
   bookDescription: {
     type: String,
-    maxLength: 500,
+    maxLength: 700,
   },
   bookReleaseDate: {
     type: Date,
@@ -55,6 +55,10 @@ const BookSchema = mongoose.Schema({
   timesReserved: {
     type: Number,
   },
-});
+  reservedList: {
+    type: Array,
+    default: [],
+  },
+})
 
-export default mongoose.model('Book', BookSchema);
+export default mongoose.model('Book', BookSchema)
