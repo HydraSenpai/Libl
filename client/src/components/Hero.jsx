@@ -1,19 +1,28 @@
-import React from 'react'
-import { Button, Form } from 'react-bootstrap'
-import { useState } from 'react'
+import React from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { useState } from 'react';
+import { useFilterContext } from '../context/filter_context';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
-  const [searchTerm, setSearchTerm] = useState('')
+  const { updateFilterFromHomeSearch } = useFilterContext();
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   const submitHandler = (e) => {
-    e.preventDefault()
-    console.log(searchTerm)
-  }
+    e.preventDefault();
+    if (searchTerm && searchTerm.trim() !== '') {
+      updateFilterFromHomeSearch(searchTerm);
+      navigate('/catalogue');
+    }
+    setSearchTerm('');
+  };
+
   return (
     <div className='hero-div'>
       <h1 className='hero-title'>Libl</h1>
       <p className='hero-para'>
-        <i>All your Book needs</i>
+        <i>For all your Book needs</i>
       </p>
       {/* image */}
       <div className='hero-search-bar'>
@@ -22,8 +31,8 @@ const Hero = () => {
             className='hero-search-field'
             type='text'
             name='search-field'
-            id='seach-field'
-            placeholder='type book name or ISBN number'
+            id='search-field'
+            placeholder='Search by book title or author'
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -33,7 +42,7 @@ const Hero = () => {
         </Form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;
