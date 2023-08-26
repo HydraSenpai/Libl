@@ -5,10 +5,10 @@ import styled from 'styled-components';
 const BookPreview = ({ book }) => {
   const {
     _id,
-    book_title: title,
-    authors,
-    book_description: desc,
-    book_release_date: date,
+    bookTitle: title,
+    author,
+    bookDescription: desc,
+    bookReleaseDate: date,
     audience,
     genre,
     language,
@@ -20,9 +20,7 @@ const BookPreview = ({ book }) => {
       <img src={cover} alt='book cover' className='img' />
       <div className='info'>
         <h5>{title}</h5>
-        <p className='author'>
-          {authors.author.first_name} {authors.author.second_name}
-        </p>
+        <p className='author'>{author}</p>
         <p>Genre: {genre}</p>
         <p>Language: {language}</p>
         <p>Audience: {audience}</p>

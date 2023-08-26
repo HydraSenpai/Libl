@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFilterContext } from '../../context/filter_context';
 import { BookPreview } from './';
 import styled from 'styled-components';
@@ -17,6 +17,11 @@ const BookList = () => {
       setBookShowing(tempAmount);
     }
   };
+
+  useEffect(() => {
+    let tempLength = books.length >= 5 ? 5 : books.length;
+    setBookShowing(tempLength);
+  }, [books]);
 
   if (books.length < 1) {
     return <h5>Sorry, no books matched this search...</h5>;
