@@ -53,6 +53,11 @@ const FilterProvider = ({ children }) => {
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };
 
+  const updateFilterFromHomeSearch = (value) => {
+    let name = 'title';
+    dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
+  };
+
   const clearFilters = () => {
     dispatch({ type: CLEAR_FILTERS });
   };
@@ -64,6 +69,7 @@ const FilterProvider = ({ children }) => {
         updateSort,
         updateFilters,
         clearFilters,
+        updateFilterFromHomeSearch,
       }}
     >
       {children}

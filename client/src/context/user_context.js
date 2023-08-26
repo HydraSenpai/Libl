@@ -21,6 +21,7 @@ const token = localStorage.getItem('token');
 const initialState = {
   user: user ? JSON.parse(user) : null,
   token: token || null,
+  searchPhrase: '',
   isLoading: false,
   alertText: '',
 };
