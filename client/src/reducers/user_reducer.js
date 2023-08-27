@@ -85,6 +85,9 @@ const user_reducer = (state, action) => {
       ...state,
       user: action.payload.user,
       isLoading: false,
+      alertText: 'Account updated successfully!',
+      displayAlert: true,
+      alertType: 'success',
     };
   }
   if (action.type === UPDATE_USER_ERROR) {
@@ -92,6 +95,8 @@ const user_reducer = (state, action) => {
       ...state,
       isLoading: false,
       alertText: action.payload.msg,
+      displayAlert: true,
+      alertType: 'error',
     };
   }
   if (action.type === CLEAR_ALERT) {
