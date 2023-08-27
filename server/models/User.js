@@ -28,12 +28,7 @@ const UserSchema = mongoose.Schema({
   },
   booksReserved: {
     type: Array,
-    books: [
-      {
-        book: { type: mongoose.Schema.Types.ObjectId, required: true },
-        dateReserved: { type: Date, required: true },
-      },
-    ],
+    default: [],
   },
 })
 
