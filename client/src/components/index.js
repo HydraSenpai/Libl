@@ -3,5 +3,6 @@ import Navbar from './Navbar';
 import BookCard from './BookCard';
 import FormRowChange from './FormRowChange';
 import FormRow from './FormRow';
+import Alert from './Alert';
 
-export { FormRow, FormRowChange, Footer, Navbar, BookCard };
+export { Alert, FormRow, FormRowChange, Footer, Navbar, BookCard };

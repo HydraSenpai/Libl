@@ -39,7 +39,7 @@ const Filters = () => {
                   type='button'
                   onClick={updateFilters}
                   className={
-                    genre === genreCurrent.toLowerCase()
+                    genre.toLowerCase() === genreCurrent.toLowerCase()
                       ? 'button active'
                       : 'button'
                   }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { FormRow } from '../index';
+import { FormRow, Alert } from '../index';
 import { useUserContext } from '../../context/user_context';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +13,8 @@ const initialState = {
 const Card = () => {
   const [userDetails, setUserDetails] = useState(initialState);
   const [login, setLogin] = useState(true);
-  const { registerUser, user, loginUser, isLoading } = useUserContext();
+  const { registerUser, user, loginUser, isLoading, displayAlert } =
+    useUserContext();
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +34,7 @@ const Card = () => {
     if (user) {
       setTimeout(() => {
         navigate('/profile');
-      }, 2000);
+      }, 3000);
     }
   }, [user, navigate]);
 
@@ -45,10 +46,19 @@ const Card = () => {
     <Wrapper>
       <form
         className='card'
-        style={!login ? { height: 540 + 'px' } : { height: 450 + 'px' }}
+        style={
+          !login
+            ? displayAlert
+              ? { height: 580 + 'px' }
+              : { height: 510 + 'px' }
+            : displayAlert
+            ? { height: 490 + 'px' }
+            : { height: 420 + 'px' }
+        }
         onSubmit={handleSubmit}
       >
         <h2>{!login ? 'Create Account' : 'Login'}</h2>
+        {displayAlert && <Alert />}
         {!login && (
           <FormRow
             name='name'
@@ -80,6 +90,7 @@ const Card = () => {
             ? 'Already have a library account? '
             : "Don't have a library account already? "}
           <button
+            type='button'
             className='login-btn'
             onClick={() => setLogin(!login)}
             disabled={isLoading}
@@ -96,7 +107,7 @@ export default Card;
 
 const Wrapper = styled.div`
   .card {
-    /* height: 540px; */
+    /* height: 560px; */
     width: 500px;
     background-color: var(--grey-100);
     border-radius: 10px;
@@ -107,11 +118,11 @@ const Wrapper = styled.div`
     box-shadow: var(--shadow-3);
     transition: all 500ms;
   }
+  h2 {
+    margin-bottom: 0.5em;
+  }
   .card:hover {
     box-shadow: var(--shadow-4);
-  }
-  h2 {
-    padding-bottom: 1em;
   }
   .btn {
     margin: 1em 0em;

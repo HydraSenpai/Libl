@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import FormRowChange from '../FormRowChange';
 import { useUserContext } from '../../context/user_context';
 import validator from 'email-validator';
+import { Alert } from '../';
 
 const DetailsForm = ({ user }) => {
   const [active, setActive] = useState(null);
   const [newDetails, setNewDetails] = useState({ ...user });
-  const { editUser, isLoading } = useUserContext();
+  const { editUser, isLoading, displayAlert, alertType, alertText } =
+    useUserContext();
 
   useEffect(() => {
     setNewDetails({ ...user });
@@ -60,7 +62,8 @@ const DetailsForm = ({ user }) => {
 
   return (
     <Wrapper>
-      <h2>Account details</h2>
+      <h3>Account details</h3>
+      {displayAlert && <Alert />}
       {isLoading && <h3>Updating account...</h3>}
       <FormRowChange
         name='name'

@@ -9,6 +9,8 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  CLEAR_ALERT,
+  SHOW_CUSTOM_ALERT,
 } from '../actions/user_actions';
 import { initialState } from '../context/user_context';
 
@@ -25,13 +27,18 @@ const user_reducer = (state, action) => {
       user: action.payload.user,
       token: action.payload.token,
       isLoading: false,
+      alertText: 'Register Successful. Redirecting...',
+      displayAlert: true,
+      alertType: 'success',
     };
   }
   if (action.type === REGISTER_USER_ERROR) {
     return {
       ...state,
       isLoading: false,
+      displayAlert: true,
       alertText: action.payload.msg,
+      alertType: 'error',
     };
   }
   if (action.type === LOGIN_USER_BEGIN) {
@@ -46,6 +53,9 @@ const user_reducer = (state, action) => {
       user: action.payload.user,
       token: action.payload.token,
       isLoading: false,
+      alertText: 'Login Successful. Redirecting...',
+      displayAlert: true,
+      alertType: 'success',
     };
   }
   if (action.type === LOGIN_USER_ERROR) {
@@ -53,6 +63,8 @@ const user_reducer = (state, action) => {
       ...state,
       isLoading: false,
       alertText: action.payload.msg,
+      displayAlert: true,
+      alertType: 'error',
     };
   }
   if (action.type === LOGOUT_USER) {
@@ -73,6 +85,9 @@ const user_reducer = (state, action) => {
       ...state,
       user: action.payload.user,
       isLoading: false,
+      alertText: 'Account updated successfully!',
+      displayAlert: true,
+      alertType: 'success',
     };
   }
   if (action.type === UPDATE_USER_ERROR) {
@@ -80,6 +95,24 @@ const user_reducer = (state, action) => {
       ...state,
       isLoading: false,
       alertText: action.payload.msg,
+      displayAlert: true,
+      alertType: 'error',
+    };
+  }
+  if (action.type === CLEAR_ALERT) {
+    return {
+      ...state,
+      alertText: '',
+      alertType: '',
+      displayAlert: false,
+    };
+  }
+  if (action.type === SHOW_CUSTOM_ALERT) {
+    return {
+      ...state,
+      alertText: action.payload.message,
+      alertType: action.payload.type,
+      displayAlert: true,
     };
   }
   throw new Error(`No Matching "${action.type}" - action type`);
