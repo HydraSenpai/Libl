@@ -13,6 +13,8 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  CLEAR_ALERT,
+  SHOW_CUSTOM_ALERT,
 } from '../actions/user_actions';
 
 const user = localStorage.getItem('user');
@@ -24,6 +26,8 @@ const initialState = {
   searchPhrase: '',
   isLoading: false,
   alertText: '',
+  alertType: '',
+  displayAlert: false,
 };
 
 const UserContext = React.createContext();
@@ -73,6 +77,7 @@ const UserProvider = ({ children }) => {
         payload: { msg: error.response.data.msg },
       });
     }
+    clearAlert();
   };
 
   const loginUser = async (userData) => {
@@ -99,6 +104,7 @@ const UserProvider = ({ children }) => {
         payload: { msg: error.response.data.msg },
       });
     }
+    clearAlert();
   };
 
   const logoutUser = async () => {
@@ -129,6 +135,19 @@ const UserProvider = ({ children }) => {
         payload: { msg: error.response.data.msg },
       });
     }
+    clearAlert();
+  };
+
+  const clearAlert = () => {
+    setTimeout(() => {
+      dispatch({ type: CLEAR_ALERT });
+    }, 3000);
+  };
+
+  const showCustomAlert = ({ message, type }) => {
+    setTimeout(() => {
+      dispatch({ type: SHOW_CUSTOM_ALERT, payload: { message, type } });
+    }, 3000);
   };
 
   return (
