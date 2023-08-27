@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes'
 import CustomAPIError from '../errors/customAPIError.js'
 
 const getAllBooks = async (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Origin', '*')
   try {
     const books = await Book.find({})
     res.status(StatusCodes.OK).json({ books, numOfBooks: books.length })
@@ -16,7 +16,7 @@ const getAllBooks = async (req, res) => {
 }
 
 const getBook = async (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Origin', '*')
   try {
     const id = req.params.id
     const book = await Book.findById(id)
@@ -35,4 +35,31 @@ const getBook = async (req, res) => {
   }
 }
 
-export { getAllBooks, getBook }
+const addUserToReserve = async (req, res) => {
+  try {
+    const bookId = req.params.id
+    const book = await Book.findById(bookId)
+
+    if (!book) {
+      throw new CustomAPIError(
+        `Couldn't retrieve book. Try again soon...`,
+        StatusCodes.NOT_FOUND
+      )
+    }
+
+    const reservedList = book.reservedList
+
+    book.reservedList = [...reservedList, req.body.userId]
+
+    const updatedBook = await book.save()
+
+    res.status(StatusCodes.OK).json({ updatedBook })
+  } catch (error) {
+    throw new CustomAPIError(
+      `Couldn't retrieve book. Try again soon...`,
+      StatusCodes.INTERNAL_SERVER_ERROR
+    )
+  }
+}
+
+export { getAllBooks, getBook, addUserToReserve }
