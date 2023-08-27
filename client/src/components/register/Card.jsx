@@ -34,7 +34,7 @@ const Card = () => {
     if (user) {
       setTimeout(() => {
         navigate('/profile');
-      }, 2000);
+      }, 3000);
     }
   }, [user, navigate]);
 
@@ -90,6 +90,7 @@ const Card = () => {
             ? 'Already have a library account? '
             : "Don't have a library account already? "}
           <button
+            type='button'
             className='login-btn'
             onClick={() => setLogin(!login)}
             disabled={isLoading}

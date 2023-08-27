@@ -27,6 +27,9 @@ const user_reducer = (state, action) => {
       user: action.payload.user,
       token: action.payload.token,
       isLoading: false,
+      alertText: 'Register Successful. Redirecting...',
+      displayAlert: true,
+      alertType: 'success',
     };
   }
   if (action.type === REGISTER_USER_ERROR) {
@@ -50,6 +53,9 @@ const user_reducer = (state, action) => {
       user: action.payload.user,
       token: action.payload.token,
       isLoading: false,
+      alertText: 'Login Successful. Redirecting...',
+      displayAlert: true,
+      alertType: 'success',
     };
   }
   if (action.type === LOGIN_USER_ERROR) {

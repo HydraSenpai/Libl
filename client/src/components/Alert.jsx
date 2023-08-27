@@ -4,8 +4,14 @@ import { useUserContext } from '../context/user_context';
 
 const Alert = () => {
   const { alertType, alertText } = useUserContext();
+  let bgColor = 'var(--primary-main)';
+  if (alertType === 'error') {
+    bgColor = 'var(--red-light)';
+  } else if (alertType === 'success') {
+    bgColor = 'var(--green-light)';
+  }
   return (
-    <Wrapper>
+    <Wrapper style={{ backgroundColor: bgColor }}>
       <h5>{alertText}</h5>
     </Wrapper>
   );
@@ -18,6 +24,5 @@ const Wrapper = styled.div`
   min-width: 200px;
   margin: 0 0 1em 0;
   padding: 0.5em 2em;
-  background-color: var(--red-light);
   border-radius: 20px;
 `;
