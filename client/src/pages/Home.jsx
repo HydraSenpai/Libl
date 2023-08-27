@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import Hero from '../components/Hero'
-import BookSection from '../components/BookSection'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import Hero from '../components/Hero';
+import BookSection from '../components/BookSection';
+import axios from 'axios';
 
 const Home = () => {
-  const [trendingBooks, setTrendingBooks] = useState([])
-  const [top10Books, setTop10Books] = useState([])
+  const [trendingBooks, setTrendingBooks] = useState([]);
+  const [top10Books, setTop10Books] = useState([]);
 
   useEffect(() => {
     axios.get('http://localhost:4000/api/v1/books').then((response) => {
-      setTrendingBooks(response.data.books)
-      setTop10Books(response.data.books)
-    })
-  }, [])
+      setTrendingBooks(response.data.books);
+      setTop10Books(response.data.books);
+    });
+  }, []);
 
   return (
     <Wrapper>
@@ -32,8 +32,8 @@ const Home = () => {
 
       <Footer />
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   .home-landing {
@@ -76,11 +76,11 @@ const Wrapper = styled.div`
 
   .hero-search-field {
     width: 80%;
-    height: 2rem;
+    height: 3rem;
     border: 0.15rem solid gray;
     border-radius: 2rem 0 0 2rem;
     padding: 1rem;
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-family: 'Poppins', sans-serif;
   }
 
@@ -88,18 +88,22 @@ const Wrapper = styled.div`
     text-align: center;
     line-height: 0;
     width: 20%;
-    height: 2rem;
+    height: 3rem;
     border: 0.15rem solid gray;
     border-radius: 0 2rem 2rem 0;
     padding: 1rem;
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-family: 'Poppins', sans-serif;
-    background-color: #dd933c;
+    background-color: var(--primary-main);
+    transition: all 500ms;
   }
 
+  .hero-search-btn:hover {
+    background-color: var(--hover-main);
+  }
   .home-books-div {
     padding: 2rem 4rem;
   }
-`
+`;
 
-export default Home
+export default Home;

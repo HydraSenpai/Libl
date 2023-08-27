@@ -8,7 +8,7 @@ const Catalogue = () => {
     <Wrapper>
       <div>
         <Navbar />
-        <div className='center '>
+        <div className='center full-page_without-footer'>
           <h2>Catalogue</h2>
           <div className='books nav-padding'>
             <Filters />
