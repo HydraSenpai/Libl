@@ -4,7 +4,8 @@ import {
   register,
   login,
   updateUser,
-  addToReservedList,
+  addToBorrowedList,
+  addToWaitingList,
 } from '../controllers/authController.js'
 
 const router = express.Router()
@@ -12,6 +13,7 @@ const router = express.Router()
 router.route('/register').post(register)
 router.route('/login').post(login)
 router.route('/update').patch(auth, updateUser)
-router.route('/:id').put(addToReservedList)
+router.route('/borrow/:id').put(addToBorrowedList)
+router.route('/wait/:id').put(addToWaitingList)
 
 export default router
