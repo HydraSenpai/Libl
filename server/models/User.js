@@ -30,6 +30,10 @@ const UserSchema = mongoose.Schema({
     type: Array,
     default: [],
   },
+  waitingList: {
+    type: Array,
+    default: [],
+  },
 })
 
 UserSchema.pre('save', async function () {
