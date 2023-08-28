@@ -72,7 +72,7 @@ const updateUser = async (req, res) => {
   res.status(StatusCodes.OK).json({ user })
 }
 
-const addToReservedList = async (req, res) => {
+const addToBorrowedList = async (req, res) => {
   const userId = req.params.id
   const user = await User.findById(userId)
 
@@ -83,17 +83,38 @@ const addToReservedList = async (req, res) => {
     )
   }
 
-  const userReservedList = user.booksReserved
+  const userBorrowedList = user.booksBorrowed
 
   const bookId = req.body.bookId
 
   const dateNow = Date.now()
 
-  user.booksReserved = [...userReservedList, { bookId, dateNow }]
+  user.booksBorrowed = [...userBorrowedList, { bookId, dateNow }]
 
   const updatedUser = await user.save()
 
   res.status(StatusCodes.OK).json({ updatedUser })
 }
 
-export { register, login, updateUser, addToReservedList }
+const addToWaitingList = async (req, res) => {
+  const userId = req.params.id
+  const user = await User.findById(userId)
+
+  if (!user) {
+    throw new CustomAPIError(
+      `Couldn't retrieve user. Try again soon...`,
+      StatusCodes.NOT_FOUND
+    )
+  }
+
+  const userWaitingList = user.waitingList
+  const bookId = req.body.bookId
+
+  user.waitingList = [...userWaitingList, bookId]
+
+  const updatedUser = await user.save()
+
+  res.status(StatusCodes.OK).json({ updatedUser })
+}
+
+export { register, login, updateUser, addToBorrowedList, addToWaitingList }

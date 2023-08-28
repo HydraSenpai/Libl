@@ -26,7 +26,7 @@ const UserSchema = mongoose.Schema({
     minLength: 6,
     select: false,
   },
-  booksReserved: {
+  booksBorrowed: {
     type: Array,
     default: [],
   },
