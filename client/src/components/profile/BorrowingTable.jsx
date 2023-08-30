@@ -1,31 +1,30 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-const BorrowingTable = () => {
+const BorrowingTable = ({ user, books }) => {
   const ReturnBTN = () => {
-    return <button className='return-btn'>Return</button>;
-  };
+    return <button className='return-btn'>Return</button>
+  }
 
-  const bookDetails = [
-    {
-      name: 'random',
-      date: '10/06/2002',
-      daysBorrowed: 50,
-      returnBtn: <ReturnBTN />,
-    },
-    {
-      name: 'random 2',
-      date: '4/06/2002',
-      daysBorrowed: 2,
-      returnBtn: <ReturnBTN />,
-    },
-  ];
-  if (!bookDetails || bookDetails.length === 0) {
+  let borrowedBooks = []
+
+  for (let i = 0; i < books.length; i++) {
+    for (let j = 0; j < user.booksBorrowed.length; j++) {
+      if (books[i]._id === user.booksBorrowed[j].bookId) {
+        borrowedBooks.push({
+          ...books[i],
+          dateBorrowed: user.booksBorrowed[j].dateNow,
+        })
+      }
+    }
+  }
+
+  if (!borrowedBooks || borrowedBooks.length === 0) {
     return (
       <Wrapper>
         <h3>No Books reserved...</h3>
       </Wrapper>
-    );
+    )
   }
   return (
     <Wrapper>
@@ -37,24 +36,34 @@ const BorrowingTable = () => {
             <th>Days Borrowed</th>
             <th>Return</th>
           </tr>
-          {bookDetails.map((details, index) => {
-            const { name, date, daysBorrowed, returnBtn } = details;
+          {borrowedBooks.map((book, index) => {
+            var borrowedDT = new Date(book.dateBorrowed)
+            var now = Date.now()
+            var nowDT = new Date(now)
+            var timeDiff = nowDT.getTime() - borrowedDT.getTime()
+            var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24))
+            var options = {
+              year: 'numeric',
+              month: 'numeric',
+              day: 'numeric',
+            }
+
             return (
               <tr className='light' key={index}>
-                <td>{name}</td>
-                <td>{date}</td>
-                <td>{daysBorrowed}</td>
-                <td>{returnBtn}</td>
+                <td>{book.bookTitle}</td>
+                <td>{borrowedDT.toLocaleDateString('en', options)}</td>
+                <td>{dayDiff}</td>
+                <td>{<ReturnBTN />}</td>
               </tr>
-            );
+            )
           })}
         </tbody>
       </table>
     </Wrapper>
-  );
-};
+  )
+}
 
-export default BorrowingTable;
+export default BorrowingTable
 
 const Wrapper = styled.div`
   table {
@@ -94,4 +103,4 @@ const Wrapper = styled.div`
   .return-btn:hover {
     background-color: var(--hover-main);
   }
-`;
+`

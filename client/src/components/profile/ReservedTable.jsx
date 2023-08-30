@@ -1,29 +1,34 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
-const BorrowingTable = () => {
-  const ReturnBTN = () => {
-    return <button className='return-btn'>Return</button>;
-  };
+const BorrowingTable = ({ user, books }) => {
+  const LinkBtn = ({ id }) => {
+    return (
+      <Link to={`http://localhost:3000/book/${id}`}>
+        <button className='return-btn'>Click</button>
+      </Link>
+    )
+  }
 
-  const bookDetails = [
-    {
-      name: 'random',
-      date: '10/06/2002',
-      availability: 'available',
-    },
-    {
-      name: 'random 2',
-      date: '4/06/2002',
-      availability: 'onloan',
-    },
-  ];
-  if (!bookDetails || bookDetails.length === 0) {
+  let waitingList = []
+
+  for (let i = 0; i < books.length; i++) {
+    for (let j = 0; j < user.waitingList.length; j++) {
+      if (books[i]._id === user.waitingList[j]) {
+        waitingList.push(books[i])
+      }
+    }
+  }
+
+  console.log(waitingList)
+
+  if (!waitingList || waitingList.length === 0) {
     return (
       <Wrapper>
-        <h3>No Books reserved...</h3>
+        <h3>No Books in waiting List...</h3>
       </Wrapper>
-    );
+    )
   }
   return (
     <Wrapper>
@@ -31,26 +36,25 @@ const BorrowingTable = () => {
         <tbody>
           <tr>
             <th>Book Name</th>
-            <th>Date Reserved</th>
             <th>Availability</th>
+            <th>Book Link</th>
           </tr>
-          {bookDetails.map((details, index) => {
-            const { name, date, availability } = details;
+          {waitingList.map((book, index) => {
             return (
               <tr className='light' key={index}>
-                <td>{name}</td>
-                <td>{date}</td>
-                <td>{availability}</td>
+                <td>{book.bookTitle}</td>
+                <td>{book.availability}</td>
+                <td>{<LinkBtn id={book._id} />}</td>
               </tr>
-            );
+            )
           })}
         </tbody>
       </table>
     </Wrapper>
-  );
-};
+  )
+}
 
-export default BorrowingTable;
+export default BorrowingTable
 
 const Wrapper = styled.div`
   table {
@@ -90,4 +94,4 @@ const Wrapper = styled.div`
   .return-btn:hover {
     background-color: var(--hover-main);
   }
-`;
+`
