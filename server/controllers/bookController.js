@@ -36,6 +36,7 @@ const getBook = async (req, res) => {
 }
 
 const addUserToReserve = async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
   try {
     const bookId = req.params.id
     const book = await Book.findById(bookId)
