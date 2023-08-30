@@ -73,6 +73,7 @@ const updateUser = async (req, res) => {
 }
 
 const addToBorrowedList = async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
   const userId = req.params.id
   const user = await User.findById(userId)
 
@@ -97,6 +98,7 @@ const addToBorrowedList = async (req, res) => {
 }
 
 const addToWaitingList = async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
   const userId = req.params.id
   const user = await User.findById(userId)
 

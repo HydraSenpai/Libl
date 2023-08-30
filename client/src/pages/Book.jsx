@@ -8,8 +8,11 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { Card, Image, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
+import { reserveBook, addBookToWaitingList } from '../utils/helpers'
+import { useUserContext } from '../context/user_context'
 
 const Book = () => {
+  const { user } = useUserContext()
   const { id: bookId } = useParams()
   const [book, setBook] = useState([])
   const [similarBooks, setSimilarBooks] = useState([])
@@ -50,6 +53,14 @@ const Book = () => {
     availabilityBool,
     availabilityText,
   ])
+
+  const reserveClickHandler = () => {
+    reserveBook(user._id, bookId)
+  }
+
+  const borrowClickHandler = () => {
+    addBookToWaitingList(user._id, bookId)
+  }
 
   return (
     <Wrapper>
@@ -122,6 +133,11 @@ const Book = () => {
                   disabled={!availabilityBool}
                   style={{ backgroundColor: `${availabilityCol}` }}
                   className='availabilty-card-btn'
+                  onClick={
+                    book.availability === 'available'
+                      ? reserveClickHandler
+                      : borrowClickHandler
+                  }
                 >
                   {availabilityText}
                 </Button>
