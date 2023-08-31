@@ -8,7 +8,11 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { Card, Image, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
-import { reserveBook, addBookToWaitingList } from '../utils/helpers'
+import {
+  reserveBook,
+  addBookToWaitingList,
+  addUserToBookWaitingList,
+} from '../utils/helpers'
 import { useUserContext } from '../context/user_context'
 
 const Book = () => {
@@ -58,8 +62,9 @@ const Book = () => {
     reserveBook(user._id, bookId)
   }
 
-  const borrowClickHandler = () => {
+  const waitingClickHandler = () => {
     addBookToWaitingList(user._id, bookId)
+    addUserToBookWaitingList(user._id, bookId)
   }
 
   return (
@@ -136,7 +141,7 @@ const Book = () => {
                   onClick={
                     book.availability === 'available'
                       ? reserveClickHandler
-                      : borrowClickHandler
+                      : waitingClickHandler
                   }
                 >
                   {availabilityText}
