@@ -35,4 +35,22 @@ const addBookToWaitingList = (userId, bookId) => {
   }
 }
 
-export { getUniqueValues, reserveBook, addBookToWaitingList }
+const addUserToBookWaitingList = (userId, bookId) => {
+  try {
+    const body = { userId: userId }
+    axios
+      .put(`http://localhost:4000/api/v1/books/${bookId}`, body)
+      .then((response) => {
+        console.log(response)
+      })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export {
+  getUniqueValues,
+  reserveBook,
+  addBookToWaitingList,
+  addUserToBookWaitingList,
+}
