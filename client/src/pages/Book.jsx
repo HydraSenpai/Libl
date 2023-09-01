@@ -1,12 +1,9 @@
 import styled from 'styled-components';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import { Loading } from '../components';
+import { Loading, Navbar, Footer } from '../components';
 import BookSection from '../components/BookSection';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Card, Image, Button } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import {
@@ -75,6 +72,11 @@ const Book = () => {
     <Wrapper>
       <Navbar />
       <div className='hero'>
+        <div className='back'>
+          <Link to='/catalogue' className='btn'>
+            Back
+          </Link>
+        </div>
         <Image src={book.cover} className='book-img' />
         <div className='book-details'>
           <h3>{book.book_title}</h3>
@@ -88,7 +90,7 @@ const Book = () => {
           <p>
             <Rating
               value={book.rating}
-              text={`Resereved ${book.timesReserved} times`}
+              text={`Reserved ${book.timesReserved} times`}
             />
           </p>
         </div>
@@ -176,8 +178,11 @@ const Wrapper = styled.div`
     justify-content: flex-start;
     padding: 5rem;
     background-color: lightgray;
+    position: relative;
   }
-
+  .back {
+    position: absolute;
+  }
   .book-img {
     margin: 0 15rem;
     width: 20rem;
