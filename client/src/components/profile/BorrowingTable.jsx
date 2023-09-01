@@ -47,7 +47,6 @@ const BorrowingTable = ({ user, books }) => {
               month: 'numeric',
               day: 'numeric',
             };
-
             return (
               <tr className='light' key={index}>
                 <td>{book.bookTitle}</td>

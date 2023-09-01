@@ -96,9 +96,7 @@ const addToBorrowedList = async (req, res) => {
   }
 
   const dateNow = Date.now();
-
   user.booksBorrowed = [...userBorrowedList, { bookId, dateNow }];
-
   const updatedUser = await user.save();
 
   res.status(StatusCodes.OK).json({ updatedUser });
@@ -119,8 +117,17 @@ const addToWaitingList = async (req, res) => {
   const userWaitingList = user.waitingList;
   const bookId = req.body.bookId;
 
-  user.waitingList = [...userWaitingList, bookId];
+  // checks user hasn't already reserved/borrowed the book
+  for (let x = 0; x < userWaitingList.length; x++) {
+    if (userWaitingList[x] === bookId) {
+      throw new CustomAPIError(
+        'You already requested this book...',
+        StatusCodes.BAD_REQUEST
+      );
+    }
+  }
 
+  user.waitingList = [...userWaitingList, bookId];
   const updatedUser = await user.save();
 
   res.status(StatusCodes.OK).json({ updatedUser });

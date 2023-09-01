@@ -177,10 +177,28 @@ const UserProvider = ({ children }) => {
     clearAlert();
   };
 
-  const updateUserWaitingList = () => {
+  const updateUserWaitingList = async (bookId) => {
     console.log('trying to add user to waiting list');
     //send book id to user db and add to waiting list
     //call book context to update book reserved list
+    dispatch({ type: UPDATE_RESERVE_BEGIN });
+    try {
+      const response = await authFetch.patch(`auth/wait/${state.user._id}`, {
+        bookId,
+      });
+      console.log(response);
+      dispatch({
+        type: UPDATE_RESERVE_SUCCESS,
+        payload: { user: response.data.updatedUser },
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: UPDATE_RESERVE_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
   };
 
   return (

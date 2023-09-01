@@ -129,6 +129,9 @@ const user_reducer = (state, action) => {
       ...state,
       user: action.payload.user,
       isLoading: false,
+      alertText: 'Reserved Book!',
+      displayAlert: true,
+      alertType: 'success',
     };
   }
   if (action.type === UPDATE_RESERVE_ERROR) {
