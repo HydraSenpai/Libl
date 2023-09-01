@@ -85,6 +85,16 @@ const addToBorrowedList = async (req, res) => {
 
   const bookId = req.body.bookId;
 
+  // checks user hasn't already reserved/borrowed the book
+  for (let x = 0; x < userBorrowedList.length; x++) {
+    if (userBorrowedList[x].bookId === bookId) {
+      throw new CustomAPIError(
+        'You already reserved this book',
+        StatusCodes.BAD_REQUEST
+      );
+    }
+  }
+
   const dateNow = Date.now();
 
   user.booksBorrowed = [...userBorrowedList, { bookId, dateNow }];

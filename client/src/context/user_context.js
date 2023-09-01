@@ -15,6 +15,9 @@ import {
   UPDATE_USER_ERROR,
   CLEAR_ALERT,
   SHOW_CUSTOM_ALERT,
+  UPDATE_RESERVE_BEGIN,
+  UPDATE_RESERVE_SUCCESS,
+  UPDATE_RESERVE_ERROR,
 } from '../actions/user_actions';
 
 const user = localStorage.getItem('user');
@@ -150,10 +153,34 @@ const UserProvider = ({ children }) => {
     }, 3000);
   };
 
-  const updateUserCollection = ({}) => {
-    //choose whether to update borrowed list or waiting list
-    //send request to server
-    //call book context to update book list
+  const updateUserReserving = async (bookId) => {
+    //send book id to user db and add to borrowed books
+    //call book context to update book reserved list
+    console.log('trying to reserve book');
+    dispatch({ type: UPDATE_RESERVE_BEGIN });
+    try {
+      const response = await authFetch.patch(`auth/borrow/${state.user._id}`, {
+        bookId,
+      });
+      console.log(response);
+      dispatch({
+        type: UPDATE_RESERVE_SUCCESS,
+        payload: { user: response.data.updatedUser },
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: UPDATE_RESERVE_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
+  const updateUserWaitingList = () => {
+    console.log('trying to add user to waiting list');
+    //send book id to user db and add to waiting list
+    //call book context to update book reserved list
   };
 
   return (
@@ -164,6 +191,8 @@ const UserProvider = ({ children }) => {
         registerUser,
         logoutUser,
         editUser,
+        updateUserReserving,
+        updateUserWaitingList,
       }}
     >
       {children}

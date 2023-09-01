@@ -16,7 +16,7 @@ import { useBookContext } from '../context/book_context';
 
 const Book = () => {
   const { getSingleBook, singleBook, isLoading } = useBookContext();
-  const { user } = useUserContext();
+  const { user, updateUserReserving, updateUserWaitingList } = useUserContext();
   const { id: bookId } = useParams();
   const [book, setBook] = useState([]);
   const [similarBooks, setSimilarBooks] = useState([]);
@@ -55,15 +55,6 @@ const Book = () => {
     availabilityBool,
     availabilityText,
   ]);
-
-  const reserveClickHandler = () => {
-    reserveBook(user._id, bookId);
-  };
-
-  const waitingClickHandler = () => {
-    addBookToWaitingList(user._id, bookId);
-    addUserToBookWaitingList(user._id, bookId);
-  };
 
   if (isLoading) {
     return <Loading center />;
@@ -146,8 +137,8 @@ const Book = () => {
                   className='availabilty-card-btn'
                   onClick={
                     book.availability === 'available'
-                      ? reserveClickHandler
-                      : waitingClickHandler
+                      ? () => updateUserReserving(bookId)
+                      : () => updateUserWaitingList(bookId)
                   }
                 >
                   {availabilityText}
