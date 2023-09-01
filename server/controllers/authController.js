@@ -1,6 +1,7 @@
 import CustomAPIError from '../errors/customAPIError.js';
 import User from '../models/User.js';
 import { StatusCodes } from 'http-status-codes';
+import { addUserToReserve } from './bookController.js';
 
 const register = async (req, res) => {
   //get all input sent from login page
@@ -97,6 +98,7 @@ const addToBorrowedList = async (req, res) => {
 
   const dateNow = Date.now();
   user.booksBorrowed = [...userBorrowedList, { bookId, dateNow }];
+
   const updatedUser = await user.save();
 
   res.status(StatusCodes.OK).json({ updatedUser });
