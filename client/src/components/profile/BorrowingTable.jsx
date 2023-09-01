@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 const BorrowingTable = ({ user, books }) => {
   const ReturnBTN = () => {
-    return <button className='return-btn'>Return</button>
-  }
+    return <button className='return-btn'>Return</button>;
+  };
 
-  let borrowedBooks = []
+  let borrowedBooks = [];
 
   for (let i = 0; i < books.length; i++) {
     for (let j = 0; j < user.booksBorrowed.length; j++) {
@@ -14,7 +14,7 @@ const BorrowingTable = ({ user, books }) => {
         borrowedBooks.push({
           ...books[i],
           dateBorrowed: user.booksBorrowed[j].dateNow,
-        })
+        });
       }
     }
   }
@@ -24,7 +24,7 @@ const BorrowingTable = ({ user, books }) => {
       <Wrapper>
         <h3>No Books reserved...</h3>
       </Wrapper>
-    )
+    );
   }
   return (
     <Wrapper>
@@ -37,16 +37,16 @@ const BorrowingTable = ({ user, books }) => {
             <th>Return</th>
           </tr>
           {borrowedBooks.map((book, index) => {
-            var borrowedDT = new Date(book.dateBorrowed)
-            var now = Date.now()
-            var nowDT = new Date(now)
-            var timeDiff = nowDT.getTime() - borrowedDT.getTime()
-            var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24))
+            var borrowedDT = new Date(book.dateBorrowed);
+            var now = Date.now();
+            var nowDT = new Date(now);
+            var timeDiff = nowDT.getTime() - borrowedDT.getTime();
+            var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
             var options = {
               year: 'numeric',
               month: 'numeric',
               day: 'numeric',
-            }
+            };
 
             return (
               <tr className='light' key={index}>
@@ -55,15 +55,15 @@ const BorrowingTable = ({ user, books }) => {
                 <td>{dayDiff}</td>
                 <td>{<ReturnBTN />}</td>
               </tr>
-            )
+            );
           })}
         </tbody>
       </table>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default BorrowingTable
+export default BorrowingTable;
 
 const Wrapper = styled.div`
   table {
@@ -103,4 +103,4 @@ const Wrapper = styled.div`
   .return-btn:hover {
     background-color: var(--hover-main);
   }
-`
+`;

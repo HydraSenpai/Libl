@@ -150,6 +150,12 @@ const UserProvider = ({ children }) => {
     }, 3000);
   };
 
+  const updateUserCollection = ({}) => {
+    //choose whether to update borrowed list or waiting list
+    //send request to server
+    //call book context to update book list
+  };
+
   return (
     <UserContext.Provider
       value={{

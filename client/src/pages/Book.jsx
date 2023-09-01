@@ -1,54 +1,55 @@
-import styled from 'styled-components'
-import React, { useEffect, useState } from 'react'
-import moment from 'moment'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import BookSection from '../components/BookSection'
-import axios from 'axios'
-import { useParams } from 'react-router-dom'
-import { Card, Image, Button } from 'react-bootstrap'
-import Rating from '../components/Rating'
+import styled from 'styled-components';
+import React, { useEffect, useState } from 'react';
+import moment from 'moment';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import { Loading } from '../components';
+import BookSection from '../components/BookSection';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { Card, Image, Button } from 'react-bootstrap';
+import Rating from '../components/Rating';
 import {
   reserveBook,
   addBookToWaitingList,
   addUserToBookWaitingList,
-} from '../utils/helpers'
-import { useUserContext } from '../context/user_context'
+} from '../utils/helpers';
+import { useUserContext } from '../context/user_context';
+import { useBookContext } from '../context/book_context';
 
 const Book = () => {
-  const { user } = useUserContext()
-  const { id: bookId } = useParams()
-  const [book, setBook] = useState([])
-  const [similarBooks, setSimilarBooks] = useState([])
+  const { getSingleBook, singleBook, isLoading } = useBookContext();
+  const { user } = useUserContext();
+  const { id: bookId } = useParams();
+  const [book, setBook] = useState([]);
+  const [similarBooks, setSimilarBooks] = useState([]);
 
-  const [availabilityCol, setAvailabiltyCol] = useState('red')
-  const [availabilityText, setAvailabiltyText] = useState('No Copies')
-  const [availabilityBool, setAvailabiltyBool] = useState(false)
+  const [availabilityCol, setAvailabiltyCol] = useState('red');
+  const [availabilityText, setAvailabiltyText] = useState('No Copies');
+  const [availabilityBool, setAvailabiltyBool] = useState(false);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    getSingleBook(bookId);
+  }, []);
+
+  useEffect(() => {
+    setBook(singleBook);
+  }, [singleBook]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
     try {
-      axios
-        .get(`http://localhost:4000/api/v1/books/${bookId}`)
-        .then((response) => {
-          setBook(response.data.book)
-        })
-
-      axios.get('http://localhost:4000/api/v1/books').then((response) => {
-        setSimilarBooks(response.data.books)
-      })
-
       if (book.availability === 'available') {
-        setAvailabiltyCol('#dd933c')
-        setAvailabiltyText('Reserve')
-        setAvailabiltyBool(true)
+        setAvailabiltyCol('#dd933c');
+        setAvailabiltyText('Reserve');
+        setAvailabiltyBool(true);
       } else if (book.availability === 'onloan') {
-        setAvailabiltyCol('#c3d103')
-        setAvailabiltyText('Join Waiting List')
-        setAvailabiltyBool(true)
+        setAvailabiltyCol('#c3d103');
+        setAvailabiltyText('Join Waiting List');
+        setAvailabiltyBool(true);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, [
     bookId,
@@ -56,17 +57,20 @@ const Book = () => {
     availabilityCol,
     availabilityBool,
     availabilityText,
-  ])
+  ]);
 
   const reserveClickHandler = () => {
-    reserveBook(user._id, bookId)
-  }
+    reserveBook(user._id, bookId);
+  };
 
   const waitingClickHandler = () => {
-    addBookToWaitingList(user._id, bookId)
-    addUserToBookWaitingList(user._id, bookId)
-  }
+    addBookToWaitingList(user._id, bookId);
+    addUserToBookWaitingList(user._id, bookId);
+  };
 
+  if (isLoading) {
+    return <Loading center />;
+  }
   return (
     <Wrapper>
       <Navbar />
@@ -159,8 +163,8 @@ const Book = () => {
 
       <Footer />
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   .hero {
@@ -234,6 +238,6 @@ const Wrapper = styled.div`
   .more-books-div > * {
     padding: 1rem 0;
   }
-`
+`;
 
-export default Book
+export default Book;
