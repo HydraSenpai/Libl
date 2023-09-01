@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import { Loading, Navbar, Footer } from '../components';
+import { Loading, Navbar, Footer, Alert } from '../components';
 import BookSection from '../components/BookSection';
 import { useParams, Link } from 'react-router-dom';
 import { Card, Image, Button } from 'react-bootstrap';
@@ -16,7 +16,8 @@ import { useBookContext } from '../context/book_context';
 
 const Book = () => {
   const { getSingleBook, singleBook, isLoading } = useBookContext();
-  const { user, updateUserReserving, updateUserWaitingList } = useUserContext();
+  const { user, updateUserReserving, updateUserWaitingList, displayAlert } =
+    useUserContext();
   const { id: bookId } = useParams();
   const [book, setBook] = useState([]);
   const [similarBooks, setSimilarBooks] = useState([]);
@@ -131,6 +132,7 @@ const Book = () => {
                 {book.bookTitle}
               </Card.Title>
               <Card.Text as='div'>
+                {displayAlert && <Alert />}
                 <Button
                   disabled={!availabilityBool}
                   style={{ backgroundColor: `${availabilityCol}` }}
