@@ -4,8 +4,8 @@ const books = [
     author: 'Jennifer L. Armentrou',
     bookDescription:
       'Chosen from birth to usher in a new era, Poppy’s life has never been her own. The life of the Maiden is solitary. Never to be touched. Never to be looked upon. Never to be spoken to. Never to experience pleasure. Waiting for the day of her Ascension, she would rather be with the guards, fighting back the evil that took her family, than preparing to be found worthy by the gods. But the choice has never been hers.',
-    bookReleaseDate: new Date('1999/12/25'),
-    isbn: '9781848869345',
+    bookReleaseDate: new Date('2020/3/12'),
+    isbn: '9781952457005',
     audience: 'adults',
     language: 'english',
     genre: 'fantasy',
@@ -13,8 +13,8 @@ const books = [
     cover:
       'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1588843906l/52861201._SY475_.jpg',
     url: 'https://www.goodreads.com/book/show/52861201-from-blood-and-ash?from_choice=true',
-    rating: 2,
-    timesReserved: 5,
+    rating: 4,
+    timesReserved: 45000,
     reservedList: [],
   },
   {
@@ -22,7 +22,7 @@ const books = [
     author: 'Rebecca Serl',
     bookDescription:
       "Where do you see yourself in five years? When Type-A Manhattan lawyer Dannie Kohan is asked this question at the most important interview of her career, she has a meticulously crafted answer at the ready. Later, after nailing her interview and accepting her boyfriend's marriage proposal, Dannie goes to sleep knowing she is right on track to achieve her five-year plan. But when she wakes up, she’s suddenly in a different apartment, with a different ring on her finger, and beside a very different man. The television news is on in the background, and she can just make out the scrolling date. It’s the same night—December 15—but 2025, five years in the future.",
-    bookReleaseDate: new Date('1999/12/25'),
+    bookReleaseDate: new Date('2020/3/10'),
     isbn: '9781982137441',
     audience: 'adults',
     language: 'english',
@@ -31,8 +31,8 @@ const books = [
     cover:
       'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1586399012l/50093704._SY475_.jpg',
     url: 'https://www.goodreads.com/book/show/50093704-in-five-years?from_choice=true',
-    rating: 2,
-    timesReserved: 5,
+    rating: 3,
+    timesReserved: 32172,
     reservedList: [],
   },
   {
@@ -40,7 +40,7 @@ const books = [
     author: 'Emily Henr',
     bookDescription:
       'LA romance writer who no longer believes in love and a literary writer stuck in a rut engage in a summer-long challenge that may just upend everything they believe about happily ever afters.',
-    bookReleaseDate: new Date('1999/12/25'),
+    bookReleaseDate: new Date('2020/5/12'),
     isbn: '9781984806734',
     audience: 'adults',
     language: 'english',
@@ -49,8 +49,8 @@ const books = [
     cover:
       'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1589881197l/52867387._SY475_.jpg',
     url: 'https://www.goodreads.com/book/show/52867387-beach-read?from_choice=true',
-    rating: 2,
-    timesReserved: 1,
+    rating: 4,
+    timesReserved: 98943,
     reservedList: [],
   },
   {
@@ -58,7 +58,7 @@ const books = [
     author: 'Paul Tremblay',
     bookDescription:
       'Paul Tremblay has won widespread acclaim for illuminating the dark horrors of the mind in novels and stories that push the boundaries of storytelling itself. The fifteen pieces in this brilliant collection,  The Beast You Are , are all monsters of a kind, ready to loudly (and lovingly) smash through your head and into your heart.',
-    bookReleaseDate: new Date('1999/12/25'),
+    bookReleaseDate: new Date('2023/7/11'),
     isbn: '9780063069961',
     audience: 'adults',
     language: 'english',
@@ -67,8 +67,8 @@ const books = [
     cover:
       'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1669324638i/62966507.jpg',
     url: 'https://www.goodreads.com/book/show/62966507-the-beast-you-are',
-    rating: 2,
-    timesReserved: 5,
+    rating: 3,
+    timesReserved: 232,
     reservedList: [],
   },
   {
@@ -76,34 +76,109 @@ const books = [
     author: 'Kemi Ashing-Giwa',
     bookDescription:
       'A diverse, exciting debut space opera about a young tea expert who is taken as a political prisoner and recruited to spy on government officials—a role that may empower her to win back her nation’s independence—perfect for fans of N.K. Jemisin and Nnedi Okorafor.',
-    bookReleaseDate: new Date('1999/12/25'),
+    bookReleaseDate: new Date('2023/12/11'),
     isbn: '9781668008478',
     audience: 'adults',
     language: 'english',
-    genre: 'Fantasy',
+    genre: 'science-fiction',
     availability: 'available',
     cover:
       'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1686761083i/62919382.jpg',
     url: 'https://www.goodreads.com/book/show/62919382-the-splinter-in-the-sky',
-    rating: 2,
-    timesReserved: 5,
+    rating: 4,
+    timesReserved: 1235,
     reservedList: [],
   },
   {
-    bookTitle: 'title 3',
-    author: 'first last',
+    bookTitle: 'The Archive Undying',
+    author: 'Emma Mieko Candon',
     bookDescription:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-    bookReleaseDate: new Date('1999/12/25'),
-    isbn: '0962686003501',
-    audience: 'all',
+      'WHEN AN AI DIES, ITS CITY DIES WITH IT\nWHEN A CITY FALLS, IT LEAVES A CORPSE BEHIND\nWHEN THAT CORPSE RUNS OFF, ONLY DEVOTION CAN BRING IT BACK\n\nWhen the robotic god of Khuon Mo went mad, it destroyed everything it touched. It killed its priests, its city, and all its wondrous works. But in its final death throes, the god brought one thing back to its favorite child, Sunai. For the seventeen years since, Sunai has walked the land like a ghost, unable to die, unable to age, and unable to forget the horrors hes seen. Hes run as far as he can from the wreckage of his faith, drowning himself in drink, drugs, and men. But when Sunai wakes up in the',
+    bookReleaseDate: new Date('2023/6/12'),
+    isbn: '9781250821546',
+    audience: 'adults',
     language: 'english',
-    genre: 'non-fiction',
-    availability: 'nocopies',
-    rating: 2,
-    times_reserved: 5,
+    genre: 'science-fiction',
+    availability: 'available',
+    cover:
+      'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1686761083i/62919382.jpg',
+    url: 'https://www.goodreads.com/book/show/62919382-the-splinter-in-the-sky',
+    rating: 1,
+    timesReserved: 465,
     reservedList: [],
   },
-]
+  {
+    bookTitle: 'The Archive Undying',
+    author: 'Emma Mieko Candon',
+    bookDescription:
+      'WHEN AN AI DIES, ITS CITY DIES WITH IT\nWHEN A CITY FALLS, IT LEAVES A CORPSE BEHIND\nWHEN THAT CORPSE RUNS OFF, ONLY DEVOTION CAN BRING IT BACK\n\nWhen the robotic god of Khuon Mo went mad, it destroyed everything it touched. It killed its priests, its city, and all its wondrous works. But in its final death throes, the god brought one thing back to its favorite child, Sunai. For the seventeen years since, Sunai has walked the land like a ghost, unable to die, unable to age, and unable to forget the horrors hes seen. Hes run as far as he can from the wreckage of his faith, drowning himself in drink, drugs, and men.',
+    bookReleaseDate: new Date('2023/6/12'),
+    isbn: '9781250821546',
+    audience: 'adults',
+    language: 'english',
+    genre: 'science-fiction',
+    availability: 'available',
+    cover:
+      'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1663782524i/61885010.jpg',
+    url: 'https://www.goodreads.com/book/show/61885010-the-archive-undying?ref=rae_3',
+    rating: 2,
+    timesReserved: 1903,
+    reservedList: [],
+  },
+  {
+    bookTitle: 'Mortal Follies',
+    author: 'Alexis Hall',
+    bookDescription:
+      'It is the year 1814 and life for a young lady of good breeding has many difficulties. There are balls to attend, fashions to follow, marriages to consider and, of course, the tiny complication of existing in a world swarming with fairy spirits, interfering deities, and actual straight-up sorcerers.',
+    bookReleaseDate: new Date('2023/6/6'),
+    isbn: '9781250821546',
+    audience: 'adults',
+    language: 'english',
+    genre: 'romance',
+    availability: 'available',
+    cover:
+      'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1671214280i/62984592.jpg',
+    url: 'https://www.goodreads.com/book/show/62984592-mortal-follies?ref=rae_17',
+    rating: 3,
+    timesReserved: 899,
+    reservedList: [],
+  },
+  {
+    bookTitle: 'Tessa Miyata Is No Hero',
+    author: 'Julie Abe',
+    bookDescription:
+      'Tessa Miyata has never fit in. When she and her two sisters are told they will be staying at their grandparents in Japan, Tessa is thrilled. A summer in Japan could be her chance to go on an adventure worthy of impressing her classmates back home.',
+    bookReleaseDate: new Date('2023/8/12'),
+    isbn: '9780316448529',
+    audience: 'children',
+    language: 'english',
+    genre: 'mythology',
+    availability: 'available',
+    cover:
+      'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1671522900i/63076973.jpg',
+    url: 'https://www.goodreads.com/book/show/63076973-tessa-miyata-is-no-hero',
+    rating: 4,
+    timesReserved: 28,
+    reservedList: [],
+  },
+  {
+    bookTitle: 'The Lost Library',
+    author: 'Rebecca Stead, Wendy Mass',
+    bookDescription:
+      'When a mysterious little free library (guarded by a large orange cat) appears overnight in the small town of Martinville, eleven-year-old Evan plucks two weathered books from its shelves, never suspecting that his life is about to change.',
+    bookReleaseDate: new Date('2023/8/'),
+    isbn: '9781250838810',
+    audience: 'children',
+    language: 'english',
+    genre: 'mystery',
+    availability: 'available',
+    cover:
+      'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1673265650i/63005200.jpg',
+    url: 'https://www.goodreads.com/book/show/63005200-the-lost-library',
+    rating: 4,
+    timesReserved: 263,
+    reservedList: [],
+  },
+];
 
-export default books
+export default books;

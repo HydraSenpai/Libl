@@ -19,6 +19,7 @@ import {
   UPDATE_RESERVE_SUCCESS,
   UPDATE_RESERVE_ERROR,
 } from '../actions/user_actions';
+import { useBookContext } from './book_context';
 
 const user = localStorage.getItem('user');
 const token = localStorage.getItem('token');
@@ -168,6 +169,7 @@ const UserProvider = ({ children }) => {
         payload: { user: response.data.updatedUser },
       });
     } catch (error) {
+      if (error.status === 401) logoutUser();
       console.log(error);
       dispatch({
         type: UPDATE_RESERVE_ERROR,
@@ -192,6 +194,7 @@ const UserProvider = ({ children }) => {
         payload: { user: response.data.updatedUser },
       });
     } catch (error) {
+      if (error.status === 401) logoutUser();
       console.log(error);
       dispatch({
         type: UPDATE_RESERVE_ERROR,

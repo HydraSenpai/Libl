@@ -37,6 +37,7 @@ const getBook = async (req, res) => {
 
 const addUserToReserve = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
+  console.log('trying to set user in book');
   try {
     const bookId = req.params.id;
     const book = await Book.findById(bookId);
@@ -49,6 +50,17 @@ const addUserToReserve = async (req, res) => {
     }
 
     const reservedList = book.reservedList;
+    const userId = req.body.id;
+
+    // checks user hasn't already reserved/borrowed the book
+    for (let x = 0; x < reservedList.length; x++) {
+      if (reservedList[x] === userId) {
+        throw new CustomAPIError(
+          'You are already added to this waiting list...',
+          StatusCodes.BAD_REQUEST
+        );
+      }
+    }
 
     book.reservedList = [...reservedList, req.body.userId];
 

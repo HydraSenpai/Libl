@@ -75,7 +75,6 @@ const BookProvider = ({ children }) => {
       const { data } = await authFetch.patch(url, userId);
       dispatch({
         type: UPDATE_WAITINGLIST_SUCCESS,
-        payload: { user: data.user },
       });
       getAllBooks();
     } catch (error) {
