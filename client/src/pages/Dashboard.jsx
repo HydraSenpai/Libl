@@ -1,25 +1,25 @@
-import { useEffect, useState } from 'react'
-import { Navbar, Footer } from '../components/'
-import { useUserContext } from '../context/user_context'
-import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
-import profile from '../assets/profileblank.png'
-import DetailsForm from '../components/profile/DetailsForm'
-import Table from '../components/profile/BorrowingTable'
-import ReservedTable from '../components/profile/ReservedTable'
-import { useBookContext } from '../context/book_context'
+import { useEffect, useState } from 'react';
+import { Navbar, Footer } from '../components/';
+import { useUserContext } from '../context/user_context';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import profile from '../assets/profileblank.png';
+import DetailsForm from '../components/profile/DetailsForm';
+import Table from '../components/profile/BorrowingTable';
+import ReservedTable from '../components/profile/ReservedTable';
+import { useBookContext } from '../context/book_context';
 
 const Dashboard = () => {
-  const { logoutUser, user } = useUserContext()
-  const { books } = useBookContext()
-  const [displayOption, setDisplayOption] = useState('details')
-  const navigate = useNavigate()
+  const { logoutUser, user } = useUserContext();
+  const { books } = useBookContext();
+  const [displayOption, setDisplayOption] = useState('details');
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) {
-      navigate('/')
+      navigate('/');
     }
-  }, [user, navigate])
+  }, [user, navigate]);
 
   return (
     <Wrapper>
@@ -28,6 +28,13 @@ const Dashboard = () => {
         <div className='center'>
           {/* TOP SECTION */}
           <div className='top-section'>
+            <button
+              type='button'
+              className='btn logout-btn'
+              onClick={logoutUser}
+            >
+              Logout
+            </button>
             <img src={profile} className='profile' />
             <h3>Profile</h3>
             <h4>{user.name}</h4>
@@ -79,10 +86,10 @@ const Dashboard = () => {
       </div>
       <Footer />
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
 
 const Wrapper = styled.div`
   /* .full-page_footer {
@@ -97,6 +104,11 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+  }
+  .logout-btn {
+    position: absolute;
+    right: 20%;
   }
   .profile {
     height: 100px;
@@ -119,4 +131,4 @@ const Wrapper = styled.div`
     align-items: center;
     padding-top: 2em;
   }
-`
+`;

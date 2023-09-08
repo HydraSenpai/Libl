@@ -15,7 +15,11 @@ import {
   UPDATE_USER_ERROR,
   CLEAR_ALERT,
   SHOW_CUSTOM_ALERT,
+  UPDATE_RESERVE_BEGIN,
+  UPDATE_RESERVE_SUCCESS,
+  UPDATE_RESERVE_ERROR,
 } from '../actions/user_actions';
+import { useBookContext } from './book_context';
 
 const user = localStorage.getItem('user');
 const token = localStorage.getItem('token');
@@ -150,6 +154,56 @@ const UserProvider = ({ children }) => {
     }, 3000);
   };
 
+  const updateUserReserving = async (bookId) => {
+    //send book id to user db and add to borrowed books
+    //call book context to update book reserved list
+    console.log('trying to reserve book');
+    dispatch({ type: UPDATE_RESERVE_BEGIN });
+    try {
+      const response = await authFetch.patch(`auth/borrow/${state.user._id}`, {
+        bookId,
+      });
+      console.log(response);
+      dispatch({
+        type: UPDATE_RESERVE_SUCCESS,
+        payload: { user: response.data.updatedUser },
+      });
+    } catch (error) {
+      if (error.status === 401) logoutUser();
+      console.log(error);
+      dispatch({
+        type: UPDATE_RESERVE_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
+  const updateUserWaitingList = async (bookId) => {
+    console.log('trying to add user to waiting list');
+    //send book id to user db and add to waiting list
+    //call book context to update book reserved list
+    dispatch({ type: UPDATE_RESERVE_BEGIN });
+    try {
+      const response = await authFetch.patch(`auth/wait/${state.user._id}`, {
+        bookId,
+      });
+      console.log(response);
+      dispatch({
+        type: UPDATE_RESERVE_SUCCESS,
+        payload: { user: response.data.updatedUser },
+      });
+    } catch (error) {
+      if (error.status === 401) logoutUser();
+      console.log(error);
+      dispatch({
+        type: UPDATE_RESERVE_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -158,6 +212,8 @@ const UserProvider = ({ children }) => {
         registerUser,
         logoutUser,
         editUser,
+        updateUserReserving,
+        updateUserWaitingList,
       }}
     >
       {children}

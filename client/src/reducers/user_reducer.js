@@ -11,6 +11,9 @@ import {
   UPDATE_USER_ERROR,
   CLEAR_ALERT,
   SHOW_CUSTOM_ALERT,
+  UPDATE_RESERVE_BEGIN,
+  UPDATE_RESERVE_SUCCESS,
+  UPDATE_RESERVE_ERROR,
 } from '../actions/user_actions';
 import { initialState } from '../context/user_context';
 
@@ -113,6 +116,31 @@ const user_reducer = (state, action) => {
       alertText: action.payload.message,
       alertType: action.payload.type,
       displayAlert: true,
+    };
+  }
+  if (action.type === UPDATE_RESERVE_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === UPDATE_RESERVE_SUCCESS) {
+    return {
+      ...state,
+      user: action.payload.user,
+      isLoading: false,
+      alertText: 'Reserved Book!',
+      displayAlert: true,
+      alertType: 'success',
+    };
+  }
+  if (action.type === UPDATE_RESERVE_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      alertText: action.payload.msg,
+      displayAlert: true,
+      alertType: 'error',
     };
   }
   throw new Error(`No Matching "${action.type}" - action type`);

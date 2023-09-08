@@ -9,6 +9,9 @@ import {
   GET_SINGLE_BOOK_BEGIN,
   GET_SINGLE_BOOK_SUCCESS,
   GET_SINGLE_BOOK_ERROR,
+  UPDATE_WAITINGLIST_BEGIN,
+  UPDATE_WAITINGLIST_SUCCESS,
+  UPDATE_WAITINGLIST_ERROR,
 } from '../actions/book_actions';
 import { useUserContext } from '../context/user_context';
 
@@ -64,12 +67,29 @@ const BookProvider = ({ children }) => {
     }
   };
 
+  const addUserToBookList = async (bookId, userId) => {
+    console.log('trying to update book list');
+    let url = `/books/${bookId}`;
+    dispatch({ type: UPDATE_WAITINGLIST_BEGIN });
+    try {
+      const { data } = await authFetch.patch(url, userId);
+      dispatch({
+        type: UPDATE_WAITINGLIST_SUCCESS,
+      });
+      getAllBooks();
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: UPDATE_WAITINGLIST_ERROR });
+    }
+  };
+
   return (
     <BookContext.Provider
       value={{
         ...state,
         getAllBooks,
         getSingleBook,
+        addUserToBookList,
       }}
     >
       {children}

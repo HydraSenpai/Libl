@@ -4,5 +4,6 @@ import BookCard from './BookCard';
 import FormRowChange from './FormRowChange';
 import FormRow from './FormRow';
 import Alert from './Alert';
+import Loading from './Loading';
 
-export { Alert, FormRow, FormRowChange, Footer, Navbar, BookCard };
+export { Loading, Alert, FormRow, FormRowChange, Footer, Navbar, BookCard };

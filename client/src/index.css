@@ -288,7 +288,6 @@ ul {
     transform: rotate(360deg);
   }
 }
-
 .loading {
   width: 6rem;
   height: 6rem;
@@ -297,7 +296,7 @@ ul {
   border-top-color: var(--primary-500);
   animation: spinner 2s linear infinite;
 }
-.loading-center {
+.loading-center-horizontal {
   margin: 0 auto;
 }
 /* title */

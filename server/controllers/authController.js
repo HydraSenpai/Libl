@@ -1,6 +1,7 @@
 import CustomAPIError from '../errors/customAPIError.js';
 import User from '../models/User.js';
 import { StatusCodes } from 'http-status-codes';
+import { addUserToReserve } from './bookController.js';
 
 const register = async (req, res) => {
   //get all input sent from login page
@@ -85,8 +86,17 @@ const addToBorrowedList = async (req, res) => {
 
   const bookId = req.body.bookId;
 
-  const dateNow = Date.now();
+  // checks user hasn't already reserved/borrowed the book
+  for (let x = 0; x < userBorrowedList.length; x++) {
+    if (userBorrowedList[x].bookId === bookId) {
+      throw new CustomAPIError(
+        'You already reserved this book',
+        StatusCodes.BAD_REQUEST
+      );
+    }
+  }
 
+  const dateNow = Date.now();
   user.booksBorrowed = [...userBorrowedList, { bookId, dateNow }];
 
   const updatedUser = await user.save();
@@ -109,8 +119,17 @@ const addToWaitingList = async (req, res) => {
   const userWaitingList = user.waitingList;
   const bookId = req.body.bookId;
 
-  user.waitingList = [...userWaitingList, bookId];
+  // checks user hasn't already reserved/borrowed the book
+  for (let x = 0; x < userWaitingList.length; x++) {
+    if (userWaitingList[x] === bookId) {
+      throw new CustomAPIError(
+        'You already requested this book...',
+        StatusCodes.BAD_REQUEST
+      );
+    }
+  }
 
+  user.waitingList = [...userWaitingList, bookId];
   const updatedUser = await user.save();
 
   res.status(StatusCodes.OK).json({ updatedUser });
