@@ -3,11 +3,11 @@ import {
   getAllReservations,
   getReservation,
   deleteReservation,
+  createReservation,
 } from '../controllers/reservationController.js';
 
 const router = express.Router();
 
-router.route('/').get(getAllReservations);
-router.route('/:id').get(getReservation);
-router.route('/:id').delete(deleteReservation);
+router.route('/').get(getAllReservations).post(createReservation);
+router.route('/:id').get(getReservation).delete(deleteReservation);
 export default router;
