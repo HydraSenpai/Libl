@@ -21,10 +21,7 @@ const getBook = async (req, res) => {
     const id = req.params.id;
     const book = await Book.findById(id);
     if (!book) {
-      throw new CustomAPIError(
-        `Couldn't retrieve book. Try again soon...`,
-        StatusCodes.NOT_FOUND
-      );
+      throw new CustomAPIError(`Book doesn't exist`, StatusCodes.NOT_FOUND);
     }
     res.status(StatusCodes.OK).json({ book });
   } catch (error) {
