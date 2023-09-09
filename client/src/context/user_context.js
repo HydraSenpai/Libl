@@ -111,6 +111,10 @@ const UserProvider = ({ children }) => {
     clearAlert();
   };
 
+  const getUserReservations = () => {
+    console.log('get reservations');
+  };
+
   const logoutUser = async () => {
     removeUserFromLocalStorage();
     dispatch({ type: LOGOUT_USER });

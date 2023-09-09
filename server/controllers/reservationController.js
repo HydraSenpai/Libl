@@ -17,6 +17,14 @@ const getAllReservations = async (req, res) => {
   }
 };
 
+const getUserReservations = async (req, res) => {
+  res.send('get user reservations');
+};
+
+const getBookReservations = async (req, res) => {
+  res.send('get book reservations');
+};
+
 const getReservation = async (req, res) => {
   res.send('get single reservation');
 };
@@ -34,4 +42,6 @@ export {
   getReservation,
   deleteReservation,
   createReservation,
+  getBookReservations,
+  getUserReservations,
 };
