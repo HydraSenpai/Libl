@@ -4,6 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import { addUserToReserve } from './bookController.js';
 
 const register = async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   //get all input sent from login page
   const { name, email, password } = req.body;
   //check all fields are present
@@ -32,6 +33,7 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   const { email, password } = req.body;
   if (!email || !password) {
     throw new CustomAPIError(

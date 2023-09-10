@@ -32,12 +32,14 @@ app.use(cors(), (req, res, next) => {
 });
 
 //routes
-//routes
 app.get('/', (req, res) => {
   res.json({ msg: 'Welcome!' });
 });
+app.get('/api/v1', (req, res) => {
+  res.json({ msg: 'API' });
+});
 app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/books', auth, bookRoutes);
+app.use('/api/v1/books', bookRoutes);
 // app.use('/api/v1/reservations', auth, reservationRoutes);
 app.use('/api/v1/reservations', reservationRoutes);
 

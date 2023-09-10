@@ -15,9 +15,9 @@ import {
   UPDATE_USER_ERROR,
   CLEAR_ALERT,
   SHOW_CUSTOM_ALERT,
-  UPDATE_RESERVE_BEGIN,
-  UPDATE_RESERVE_SUCCESS,
-  UPDATE_RESERVE_ERROR,
+  PROCESS_BEGIN,
+  GET_RESERVATIONS_SUCCESS,
+  GET_RESERVATIONS_ERROR,
 } from '../actions/user_actions';
 import { useBookContext } from './book_context';
 
@@ -27,6 +27,7 @@ const token = localStorage.getItem('token');
 const initialState = {
   user: user ? JSON.parse(user) : null,
   token: token || null,
+  reservations: null,
   searchPhrase: '',
   isLoading: false,
   alertText: '',
@@ -45,6 +46,12 @@ const UserProvider = ({ children }) => {
       Authorization: `Bearer ${state.token}`,
     },
   });
+
+  useEffect(() => {
+    if (user) {
+      getUserReservations();
+    }
+  }, [user]);
 
   const addUserToLocalStorage = ({ user, token }) => {
     localStorage.setItem('user', JSON.stringify(user));
@@ -72,7 +79,6 @@ const UserProvider = ({ children }) => {
         user: response.data.user,
         token: response.data.token,
       });
-      console.log('user submitted');
     } catch (error) {
       console.log(error);
       //if error save error message to state
@@ -111,8 +117,22 @@ const UserProvider = ({ children }) => {
     clearAlert();
   };
 
-  const getUserReservations = () => {
-    console.log('get reservations');
+  const getUserReservations = async () => {
+    console.log('getting user reservations');
+    dispatch({ type: PROCESS_BEGIN });
+    try {
+      const response = await authFetch.get(
+        `/reservations/user/${state.user._id}`
+      );
+      const { reservations } = response.data;
+      dispatch({ type: GET_RESERVATIONS_SUCCESS, payload: reservations });
+    } catch (error) {
+      console.log(error);
+      //if error save error message to state
+      dispatch({
+        type: GET_RESERVATIONS_ERROR,
+      });
+    }
   };
 
   const logoutUser = async () => {
@@ -158,55 +178,55 @@ const UserProvider = ({ children }) => {
     }, 3000);
   };
 
-  const updateUserReserving = async (bookId) => {
-    //send book id to user db and add to borrowed books
-    //call book context to update book reserved list
-    console.log('trying to reserve book');
-    dispatch({ type: UPDATE_RESERVE_BEGIN });
-    try {
-      const response = await authFetch.patch(`auth/borrow/${state.user._id}`, {
-        bookId,
-      });
-      console.log(response);
-      dispatch({
-        type: UPDATE_RESERVE_SUCCESS,
-        payload: { user: response.data.updatedUser },
-      });
-    } catch (error) {
-      if (error.status === 401) logoutUser();
-      console.log(error);
-      dispatch({
-        type: UPDATE_RESERVE_ERROR,
-        payload: { msg: error.response.data.msg },
-      });
-    }
-    clearAlert();
-  };
+  // const updateUserReserving = async (bookId) => {
+  //   //send book id to user db and add to borrowed books
+  //   //call book context to update book reserved list
+  //   console.log('trying to reserve book');
+  //   dispatch({ type: UPDATE_RESERVE_BEGIN });
+  //   try {
+  //     const response = await authFetch.patch(`auth/borrow/${state.user._id}`, {
+  //       bookId,
+  //     });
+  //     console.log(response);
+  //     dispatch({
+  //       type: UPDATE_RESERVE_SUCCESS,
+  //       payload: { user: response.data.updatedUser },
+  //     });
+  //   } catch (error) {
+  //     if (error.status === 401) logoutUser();
+  //     console.log(error);
+  //     dispatch({
+  //       type: UPDATE_RESERVE_ERROR,
+  //       payload: { msg: error.response.data.msg },
+  //     });
+  //   }
+  //   clearAlert();
+  // };
 
-  const updateUserWaitingList = async (bookId) => {
-    console.log('trying to add user to waiting list');
-    //send book id to user db and add to waiting list
-    //call book context to update book reserved list
-    dispatch({ type: UPDATE_RESERVE_BEGIN });
-    try {
-      const response = await authFetch.patch(`auth/wait/${state.user._id}`, {
-        bookId,
-      });
-      console.log(response);
-      dispatch({
-        type: UPDATE_RESERVE_SUCCESS,
-        payload: { user: response.data.updatedUser },
-      });
-    } catch (error) {
-      if (error.status === 401) logoutUser();
-      console.log(error);
-      dispatch({
-        type: UPDATE_RESERVE_ERROR,
-        payload: { msg: error.response.data.msg },
-      });
-    }
-    clearAlert();
-  };
+  // const updateUserWaitingList = async (bookId) => {
+  //   console.log('trying to add user to waiting list');
+  //   //send book id to user db and add to waiting list
+  //   //call book context to update book reserved list
+  //   dispatch({ type: UPDATE_RESERVE_BEGIN });
+  //   try {
+  //     const response = await authFetch.patch(`auth/wait/${state.user._id}`, {
+  //       bookId,
+  //     });
+  //     console.log(response);
+  //     dispatch({
+  //       type: UPDATE_RESERVE_SUCCESS,
+  //       payload: { user: response.data.updatedUser },
+  //     });
+  //   } catch (error) {
+  //     if (error.status === 401) logoutUser();
+  //     console.log(error);
+  //     dispatch({
+  //       type: UPDATE_RESERVE_ERROR,
+  //       payload: { msg: error.response.data.msg },
+  //     });
+  //   }
+  //   clearAlert();
+  // };
 
   return (
     <UserContext.Provider
@@ -216,8 +236,6 @@ const UserProvider = ({ children }) => {
         registerUser,
         logoutUser,
         editUser,
-        updateUserReserving,
-        updateUserWaitingList,
       }}
     >
       {children}

@@ -102,6 +102,7 @@ const getReservation = async (req, res) => {
 };
 
 const createReservation = async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   //get all input sent from login page
   const { userId, bookId } = req.body;
   try {
@@ -159,6 +160,7 @@ const createReservation = async (req, res) => {
 };
 
 const deleteReservation = async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   try {
     const deletedReservation = await Reservation.findOneAndDelete({
       _id: req.params.id,

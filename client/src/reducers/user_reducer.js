@@ -14,10 +14,19 @@ import {
   UPDATE_RESERVE_BEGIN,
   UPDATE_RESERVE_SUCCESS,
   UPDATE_RESERVE_ERROR,
+  PROCESS_BEGIN,
+  GET_RESERVATIONS_SUCCESS,
+  GET_RESERVATIONS_ERROR,
 } from '../actions/user_actions';
 import { initialState } from '../context/user_context';
 
 const user_reducer = (state, action) => {
+  if (action.type === PROCESS_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
   if (action.type === REGISTER_USER_BEGIN) {
     return {
       ...state,
@@ -141,6 +150,19 @@ const user_reducer = (state, action) => {
       alertText: action.payload.msg,
       displayAlert: true,
       alertType: 'error',
+    };
+  }
+  if (action.type === GET_RESERVATIONS_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      reservations: action.payload,
+    };
+  }
+  if (action.type === GET_RESERVATIONS_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
     };
   }
   throw new Error(`No Matching "${action.type}" - action type`);

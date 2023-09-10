@@ -31,7 +31,7 @@ const BookProvider = ({ children }) => {
   const authFetch = axios.create({
     baseURL: '/api/v1',
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${state.token}`,
     },
   });
 
