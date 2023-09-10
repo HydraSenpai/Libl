@@ -30,7 +30,53 @@ const getReservation = async (req, res) => {
 };
 
 const createReservation = async (req, res) => {
-  res.send('create single reservation');
+  //get all input sent from login page
+  const { userId, bookId } = req.body;
+  //check all fields are present
+  if (!userId || !bookId) {
+    throw new CustomAPIError(
+      'Id values missing to create reservation',
+      StatusCodes.BAD_REQUEST
+    );
+  }
+  // check a reservation with same userId and bookId doesn't already exist
+  const reservationExists = await Reservation.findOne({
+    userId: userId,
+    bookId: bookId,
+  });
+  if (reservationExists) {
+    throw new CustomAPIError(
+      'Reservation already exists for this book and user',
+      StatusCodes.BAD_REQUEST
+    );
+  }
+  //create date from current date
+  const date = new Date();
+  //search reservations and find next queue number for given bookId
+  //check reservations do exist for bookId or there will be no queue number to find
+  const reservationForBookExists = await Reservation.findOne({
+    bookId: bookId,
+  });
+  let maxQueueNumber = 1;
+  if (reservationForBookExists) {
+    //find max queue number in reservations for given book then add 1 to create next queue
+    maxQueueNumber = await Reservation.find({})
+      .sort({ queueNumber: -1 })
+      .limit(1)
+      .then((reservations) => reservations[0].queueNumber);
+    maxQueueNumber += 1;
+  }
+  //add entry
+  const reservation = await Reservation.create({
+    bookId,
+    userId,
+    reservationDate: date,
+    queueNumber: maxQueueNumber,
+  });
+  //send back reservation data and token
+  res.status(StatusCodes.CREATED).json({
+    reservation,
+  });
 };
 
 const deleteReservation = async (req, res) => {

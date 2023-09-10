@@ -37,10 +37,9 @@ app.get('/', (req, res) => {
   res.json({ msg: 'Welcome!' });
 });
 app.use('/api/v1/auth', authRoutes);
-// will use auth soon, want to text first
 app.use('/api/v1/books', auth, bookRoutes);
-// app.use('api/v1', auth, bookRoutes);
-app.use('/api/v1/reservations', auth, reservationRoutes);
+// app.use('/api/v1/reservations', auth, reservationRoutes);
+app.use('/api/v1/reservations', reservationRoutes);
 
 //custom middleware
 app.use(notFound);
