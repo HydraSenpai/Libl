@@ -18,11 +18,47 @@ const getAllReservations = async (req, res) => {
 };
 
 const getUserReservations = async (req, res) => {
-  res.send('get user reservations');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  const { userId } = req.body;
+  try {
+    if (!userId) {
+      throw new CustomAPIError(
+        'UserId missing to find reservation',
+        StatusCodes.BAD_REQUEST
+      );
+    }
+    const reservations = await Reservation.find({ userId: userId });
+    res
+      .status(StatusCodes.OK)
+      .json({ reservations, numOfReservations: reservations.length });
+  } catch (error) {
+    throw new CustomAPIError(
+      `Couldn't retrieve reservation list. Try again soon...`,
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+  }
 };
 
 const getBookReservations = async (req, res) => {
-  res.send('get book reservations');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  const { bookId } = req.body;
+  try {
+    if (!bookId) {
+      throw new CustomAPIError(
+        'UserId missing to find reservation',
+        StatusCodes.BAD_REQUEST
+      );
+    }
+    const reservations = await Reservation.find({ bookId: bookId });
+    res
+      .status(StatusCodes.OK)
+      .json({ reservations, numOfReservations: reservations.length });
+  } catch (error) {
+    throw new CustomAPIError(
+      `Couldn't retrieve reservation list. Try again soon...`,
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+  }
 };
 
 const getReservation = async (req, res) => {
