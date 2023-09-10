@@ -61,6 +61,26 @@ const getBookReservations = async (req, res) => {
   }
 };
 
+const getNumberReservations = async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  const bookId = req.params.id;
+  try {
+    if (!bookId) {
+      throw new CustomAPIError(
+        'UserId missing to find reservation',
+        StatusCodes.BAD_REQUEST
+      );
+    }
+    const reservations = await Reservation.find({ bookId: bookId });
+    res.status(StatusCodes.OK).json({ numOfReservations: reservations.length });
+  } catch (error) {
+    throw new CustomAPIError(
+      `Couldn't retrieve reservation list. Try again soon...`,
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+  }
+};
+
 const getReservation = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   const reservationId = req.params.id;
@@ -166,4 +186,5 @@ export {
   createReservation,
   getBookReservations,
   getUserReservations,
+  getNumberReservations,
 };
