@@ -19,7 +19,7 @@ const getAllReservations = async (req, res) => {
 
 const getUserReservations = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  const { userId } = req.body;
+  const userId = req.params.id;
   try {
     if (!userId) {
       throw new CustomAPIError(
@@ -41,7 +41,7 @@ const getUserReservations = async (req, res) => {
 
 const getBookReservations = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  const { bookId } = req.body;
+  const bookId = req.params.id;
   try {
     if (!bookId) {
       throw new CustomAPIError(
@@ -62,7 +62,23 @@ const getBookReservations = async (req, res) => {
 };
 
 const getReservation = async (req, res) => {
-  res.send('get single reservation');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  const reservationId = req.params.id;
+  try {
+    if (!reservationId) {
+      throw new CustomAPIError(
+        'ReservationId missing to find reservation',
+        StatusCodes.BAD_REQUEST
+      );
+    }
+    const reservation = await Reservation.find({ _id: reservationId });
+    res.status(StatusCodes.OK).json({ reservation });
+  } catch (error) {
+    throw new CustomAPIError(
+      `Couldn't retrieve reservation list. Try again soon...`,
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+  }
 };
 
 const createReservation = async (req, res) => {
