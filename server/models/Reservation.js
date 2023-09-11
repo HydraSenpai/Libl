@@ -11,6 +11,10 @@ const ReservationSchema = mongoose.Schema({
     ref: 'User',
     required: [true, 'Please provide user'],
   },
+  status: {
+    type: String,
+    enum: ['waiting', 'onloan'],
+  },
   reservationDate: {
     type: Date,
   },

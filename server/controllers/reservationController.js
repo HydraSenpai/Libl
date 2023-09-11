@@ -146,6 +146,7 @@ const createReservation = async (req, res) => {
       userId,
       reservationDate: date,
       queueNumber: maxQueueNumber,
+      status: 'waiting',
     });
     //send back reservation data and token
     res.status(StatusCodes.CREATED).json({
