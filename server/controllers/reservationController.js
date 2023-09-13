@@ -140,13 +140,20 @@ const createReservation = async (req, res) => {
         .then((reservations) => reservations[0].queueNumber);
       maxQueueNumber += 1;
     }
+    //find suitable status
+    let statusTemp;
+    if (maxQueueNumber > 1) {
+      statusTemp = 'waiting';
+    } else {
+      statusTemp = 'onloan';
+    }
     //add entry
     const reservation = await Reservation.create({
       bookId,
       userId,
       reservationDate: date,
       queueNumber: maxQueueNumber,
-      status: 'waiting',
+      status: statusTemp,
     });
     //send back reservation data and token
     res.status(StatusCodes.CREATED).json({
