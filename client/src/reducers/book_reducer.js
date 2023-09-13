@@ -8,6 +8,8 @@ import {
   UPDATE_WAITINGLIST_BEGIN,
   UPDATE_WAITINGLIST_SUCCESS,
   UPDATE_WAITINGLIST_ERROR,
+  UPDATE_STATUS,
+  CREATE_RESERVATION_SUCCESS,
 } from '../actions/book_actions';
 
 const book_reducer = (state, action) => {
@@ -66,6 +68,23 @@ const book_reducer = (state, action) => {
     return {
       ...state,
       isLoading: false,
+    };
+  }
+  if (action.type === UPDATE_STATUS) {
+    const updatedSingleBook = { ...state.singleBook };
+    if (action.payload && action.payload > 0) {
+      updatedSingleBook.status = 'waiting';
+    } else {
+      updatedSingleBook.status = 'available';
+    }
+    return {
+      ...state,
+      singleBook: updatedSingleBook,
+    };
+  }
+  if (action.type === CREATE_RESERVATION_SUCCESS) {
+    return {
+      ...state,
     };
   }
   throw new Error(`No Matching "${action.type}" - action type`);

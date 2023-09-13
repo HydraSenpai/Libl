@@ -71,7 +71,7 @@ const getNumberReservations = async (req, res) => {
         StatusCodes.BAD_REQUEST
       );
     }
-    const reservations = await Reservation.find({ bookId: bookId });
+    const reservations = await Reservation.find({ _id: bookId });
     res.status(StatusCodes.OK).json({ numOfReservations: reservations.length });
   } catch (error) {
     throw new CustomAPIError(
