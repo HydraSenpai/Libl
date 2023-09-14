@@ -71,6 +71,7 @@ const book_reducer = (state, action) => {
     };
   }
   if (action.type === UPDATE_STATUS) {
+    console.log(action.payload);
     const updatedSingleBook = { ...state.singleBook };
     if (action.payload && action.payload > 0) {
       updatedSingleBook.status = 'waiting';

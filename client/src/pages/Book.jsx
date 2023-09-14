@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Loading, Navbar, Footer, Alert } from '../components';
 import BookSection from '../components/BookSection';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Card, Image, Button } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import {
@@ -15,6 +15,7 @@ import { useUserContext } from '../context/user_context';
 import { useBookContext } from '../context/book_context';
 
 const Book = () => {
+  const navigate = useNavigate();
   const {
     getSingleBook,
     singleBook,
@@ -31,6 +32,14 @@ const Book = () => {
   const [availabilityCol, setAvailabiltyCol] = useState('red');
   const [availabilityText, setAvailabiltyText] = useState('No Copies');
   const [availabilityBool, setAvailabiltyBool] = useState(false);
+
+  const createReservationHandler = () => {
+    if (user) {
+      createReservation(singleBook._id);
+    } else {
+      navigate('/register');
+    }
+  };
 
   useEffect(() => {
     getSingleBook(bookId);
@@ -147,7 +156,7 @@ const Book = () => {
                   disabled={!availabilityBool}
                   style={{ backgroundColor: `${availabilityCol}` }}
                   className='availabilty-card-btn'
-                  onClick={() => createReservation(singleBook._id)}
+                  onClick={createReservationHandler}
                 >
                   {availabilityText}
                 </Button>

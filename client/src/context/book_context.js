@@ -88,11 +88,11 @@ const BookProvider = ({ children }) => {
   const getBookReservation = async (bookId) => {
     //this gets the number of reservations a book has and calculates status based on that
     console.log('trying to get number of reservations');
-    let url = `/reservations/`;
+    let url = `/reservations/reservationsNumber/`;
     dispatch({ type: GET_BOOKS_BEGIN });
+    console.log(' bookId ' + bookId);
     try {
-      const { data } = await authFetch.get(url, bookId);
-      console.log(data.numOfReservations);
+      const { data } = await authFetch.post(url, { bookId });
       dispatch({ type: UPDATE_STATUS, payload: data.numOfReservations });
     } catch (error) {
       console.log(error);

@@ -63,19 +63,33 @@ const getBookReservations = async (req, res) => {
 
 const getNumberReservations = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  const bookId = req.params.id;
+  const { bookId } = req.body;
   try {
     if (!bookId) {
       throw new CustomAPIError(
-        'UserId missing to find reservation',
+        'Values missing to find reservation',
         StatusCodes.BAD_REQUEST
       );
     }
-    const reservations = await Reservation.find({ _id: bookId });
-    res.status(StatusCodes.OK).json({ numOfReservations: reservations.length });
+    const reservations = await Reservation.find({
+      bookId: bookId,
+    });
+    if (!reservations) {
+      res.status(StatusCodes.OK).json({ numOfReservations: 0 });
+    } else {
+      res
+        .status(StatusCodes.OK)
+        .json({ numOfReservations: reservations.length });
+    }
   } catch (error) {
+    if (!bookId) {
+      throw new CustomAPIError(
+        'Values missing to find reservation',
+        StatusCodes.BAD_REQUEST
+      );
+    }
     throw new CustomAPIError(
-      `Couldn't retrieve reservation list. Try again soon...`,
+      `Couldn't retrieve reservation count. Try again soon...`,
       StatusCodes.INTERNAL_SERVER_ERROR
     );
   }
