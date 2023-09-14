@@ -10,9 +10,20 @@ import {
   UPDATE_WAITINGLIST_ERROR,
   UPDATE_STATUS,
   CREATE_RESERVATION_SUCCESS,
+  GET_RESERVATION_ERROR,
+  CREATE_RESERVATION_ERROR,
+  CLEAR_ALERT,
 } from '../actions/book_actions';
 
 const book_reducer = (state, action) => {
+  if (action.type === CLEAR_ALERT) {
+    return {
+      ...state,
+      alertText: '',
+      alertType: '',
+      displayAlert: false,
+    };
+  }
   if (action.type === GET_BOOKS_BEGIN) {
     return {
       ...state,
@@ -86,6 +97,25 @@ const book_reducer = (state, action) => {
   if (action.type === CREATE_RESERVATION_SUCCESS) {
     return {
       ...state,
+      isLoading: false,
+      alertText: 'Success!',
+      alertType: 'success',
+      displayAlert: true,
+    };
+  }
+  if (action.type === CREATE_RESERVATION_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      alertText: 'Error',
+      alertType: 'error',
+      displayAlert: true,
+    };
+  }
+  if (action.type === GET_RESERVATION_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
     };
   }
   throw new Error(`No Matching "${action.type}" - action type`);
