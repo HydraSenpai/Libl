@@ -12,6 +12,8 @@ import {
   UPDATE_WAITINGLIST_BEGIN,
   UPDATE_WAITINGLIST_SUCCESS,
   UPDATE_WAITINGLIST_ERROR,
+  UPDATE_STATUS,
+  CREATE_RESERVATION_SUCCESS,
 } from '../actions/book_actions';
 import { useUserContext } from '../context/user_context';
 
@@ -83,6 +85,38 @@ const BookProvider = ({ children }) => {
     }
   };
 
+  const getBookReservation = async (bookId) => {
+    //this gets the number of reservations a book has and calculates status based on that
+    console.log('trying to get number of reservations');
+    let url = `/reservations/reservationsNumber/`;
+    dispatch({ type: GET_BOOKS_BEGIN });
+    console.log(' bookId ' + bookId);
+    try {
+      const { data } = await authFetch.post(url, { bookId });
+      dispatch({ type: UPDATE_STATUS, payload: data.numOfReservations });
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: UPDATE_WAITINGLIST_ERROR });
+    }
+  };
+
+  const createReservation = async (bookId) => {
+    console.log('trying to create book reservation');
+    let url = `/reservations/`;
+    dispatch({ type: GET_BOOKS_BEGIN });
+    try {
+      const { data } = await authFetch.post(url, { userId: user._id, bookId });
+      dispatch({
+        type: CREATE_RESERVATION_SUCCESS,
+      });
+      getBookReservation(bookId);
+      getSingleBook(bookId);
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: UPDATE_WAITINGLIST_ERROR });
+    }
+  };
+
   return (
     <BookContext.Provider
       value={{
@@ -90,6 +124,8 @@ const BookProvider = ({ children }) => {
         getAllBooks,
         getSingleBook,
         addUserToBookList,
+        getBookReservation,
+        createReservation,
       }}
     >
       {children}

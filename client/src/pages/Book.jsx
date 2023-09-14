@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Loading, Navbar, Footer, Alert } from '../components';
 import BookSection from '../components/BookSection';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Card, Image, Button } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import {
@@ -15,7 +15,14 @@ import { useUserContext } from '../context/user_context';
 import { useBookContext } from '../context/book_context';
 
 const Book = () => {
-  const { getSingleBook, singleBook, isLoading } = useBookContext();
+  const navigate = useNavigate();
+  const {
+    getSingleBook,
+    singleBook,
+    isLoading,
+    getBookReservation,
+    createReservation,
+  } = useBookContext();
   const { user, updateUserReserving, updateUserWaitingList, displayAlert } =
     useUserContext();
   const { id: bookId } = useParams();
@@ -26,8 +33,17 @@ const Book = () => {
   const [availabilityText, setAvailabiltyText] = useState('No Copies');
   const [availabilityBool, setAvailabiltyBool] = useState(false);
 
+  const createReservationHandler = () => {
+    if (user) {
+      createReservation(singleBook._id);
+    } else {
+      navigate('/register');
+    }
+  };
+
   useEffect(() => {
     getSingleBook(bookId);
+    getBookReservation(bookId);
   }, []);
 
   useEffect(() => {
@@ -35,26 +51,29 @@ const Book = () => {
   }, [singleBook]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    try {
-      if (book.availability === 'available') {
-        setAvailabiltyCol('#dd933c');
-        setAvailabiltyText('Reserve');
-        setAvailabiltyBool(true);
-      } else if (book.availability === 'onloan') {
-        setAvailabiltyCol('#c3d103');
-        setAvailabiltyText('Join Waiting List');
-        setAvailabiltyBool(true);
+    if (singleBook.status) {
+      window.scrollTo(0, 0);
+      try {
+        if (singleBook.status === 'available') {
+          setAvailabiltyCol('#dd933c');
+          setAvailabiltyText('Reserve');
+          setAvailabiltyBool(true);
+        } else if (singleBook.status === 'waiting') {
+          setAvailabiltyCol('#c3d103');
+          setAvailabiltyText('Join Waiting List');
+          setAvailabiltyBool(true);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   }, [
     bookId,
-    book.availability,
+    singleBook.status,
     availabilityCol,
     availabilityBool,
     availabilityText,
+    singleBook,
   ]);
 
   if (isLoading) {
@@ -137,11 +156,7 @@ const Book = () => {
                   disabled={!availabilityBool}
                   style={{ backgroundColor: `${availabilityCol}` }}
                   className='availabilty-card-btn'
-                  onClick={
-                    book.availability === 'available'
-                      ? () => updateUserReserving(bookId)
-                      : () => updateUserWaitingList(bookId)
-                  }
+                  onClick={createReservationHandler}
                 >
                   {availabilityText}
                 </Button>
