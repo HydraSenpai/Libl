@@ -14,14 +14,21 @@ import {
   UPDATE_WAITINGLIST_ERROR,
   UPDATE_STATUS,
   CREATE_RESERVATION_SUCCESS,
+  GET_RESERVATION_ERROR,
+  CREATE_RESERVATION_ERROR,
+  CLEAR_ALERT,
 } from '../actions/book_actions';
 import { useUserContext } from '../context/user_context';
+import { GET_RESERVATIONS_ERROR } from '../actions/user_actions';
 
 const initialState = {
   books: [],
   singleBook: {},
   totalBooks: 0,
   isLoading: true,
+  alertText: '',
+  alertType: '',
+  displayAlert: false,
 };
 
 const BookContext = React.createContext();
@@ -96,7 +103,7 @@ const BookProvider = ({ children }) => {
       dispatch({ type: UPDATE_STATUS, payload: data.numOfReservations });
     } catch (error) {
       console.log(error);
-      dispatch({ type: UPDATE_WAITINGLIST_ERROR });
+      dispatch({ type: GET_RESERVATION_ERROR });
     }
   };
 
@@ -113,8 +120,15 @@ const BookProvider = ({ children }) => {
       getSingleBook(bookId);
     } catch (error) {
       console.log(error);
-      dispatch({ type: UPDATE_WAITINGLIST_ERROR });
+      dispatch({ type: CREATE_RESERVATION_ERROR });
     }
+    clearAlert();
+  };
+
+  const clearAlert = () => {
+    setTimeout(() => {
+      dispatch({ type: CLEAR_ALERT });
+    }, 3000);
   };
 
   return (

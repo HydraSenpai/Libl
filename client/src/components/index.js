@@ -5,5 +5,15 @@ import FormRowChange from './FormRowChange';
 import FormRow from './FormRow';
 import Alert from './Alert';
 import Loading from './Loading';
+import BookAlert from './BookAlert';
 
-export { Loading, Alert, FormRow, FormRowChange, Footer, Navbar, BookCard };
+export {
+  BookAlert,
+  Loading,
+  Alert,
+  FormRow,
+  FormRowChange,
+  Footer,
+  Navbar,
+  BookCard,
+};
