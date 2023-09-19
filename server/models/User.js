@@ -34,6 +34,7 @@ const UserSchema = mongoose.Schema({
     type: Array,
     default: [],
   },
+  isAdmin: { type: Boolean, required: true, default: false },
 })
 
 UserSchema.pre('save', async function () {
