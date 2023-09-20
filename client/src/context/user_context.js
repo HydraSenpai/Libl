@@ -256,6 +256,7 @@ const UserProvider = ({ children }) => {
         editUser,
         doingEvent,
         endEvent,
+        getUserReservations,
       }}
     >
       {children}

@@ -35,7 +35,7 @@ const BookContext = React.createContext();
 
 const BookProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { token, user, logoutUser } = useUserContext();
+  const { token, user, logoutUser, getUserReservations } = useUserContext();
 
   const authFetch = axios.create({
     baseURL: '/api/v1',
@@ -86,6 +86,7 @@ const BookProvider = ({ children }) => {
         type: UPDATE_WAITINGLIST_SUCCESS,
       });
       getAllBooks();
+      getUserReservations();
     } catch (error) {
       console.log(error);
       dispatch({ type: UPDATE_WAITINGLIST_ERROR });
@@ -118,6 +119,7 @@ const BookProvider = ({ children }) => {
       });
       getBookReservation(bookId);
       getSingleBook(bookId);
+      getUserReservations();
     } catch (error) {
       console.log(error);
       dispatch({ type: CREATE_RESERVATION_ERROR });

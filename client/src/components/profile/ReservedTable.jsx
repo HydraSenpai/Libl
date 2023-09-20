@@ -8,13 +8,14 @@ import { Loading } from '../';
 const ReservedTable = () => {
   const LinkBtn = ({ id }) => {
     return (
-      <Link to={`http://localhost:3000/book/${id}`}>
+      <Link to={`/book/${id}`}>
         <button className='return-btn'>Click</button>
       </Link>
     );
   };
 
-  const { reservations, isLoading, doingEvent, endEvent } = useUserContext();
+  const { reservations, isLoading, doingEvent, endEvent, getUserReservations } =
+    useUserContext();
   const { books } = useBookContext();
   const [reservedList, setReservedList] = useState({});
 
@@ -31,6 +32,7 @@ const ReservedTable = () => {
 
   useEffect(() => {
     doingEvent();
+    getUserReservations();
     let reservedLists = getReservedBooks();
     setReservedList(reservedLists);
   }, []);
@@ -63,15 +65,15 @@ const ReservedTable = () => {
           <tbody>
             <tr>
               <th>Book Name</th>
-              <th>Availability</th>
+              {/* <th>Availability</th> */}
               <th>Book Link</th>
             </tr>
             {reservedList.map((bookInList) => {
               return (
                 <tr className='light'>
                   <td>{bookInList.bookTitle}</td>
-                  <td>{bookInList.status}</td>
-                  <td>{<LinkBtn id={bookInList.bookId} />}</td>
+                  {/* <td>{bookInList.status}</td> */}
+                  <td>{<LinkBtn id={bookInList._id} />}</td>
                 </tr>
               );
             })}
