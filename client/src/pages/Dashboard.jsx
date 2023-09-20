@@ -73,12 +73,12 @@ const Dashboard = () => {
             )}
             {displayOption === 'borrowing' && (
               <div className='borrowing'>
-                <Table user={user} books={books} />
+                <Table />
               </div>
             )}
             {displayOption === 'reserved' && (
               <div className='reserved'>
-                <ReservedTable user={user} books={books} />
+                <ReservedTable />
               </div>
             )}
           </div>
