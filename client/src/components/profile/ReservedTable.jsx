@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useUserContext } from '../../context/user_context';
+import { useBookContext } from '../../context/book_context';
 
-const BorrowingTable = ({ user, books }) => {
+const BorrowingTable = () => {
   const LinkBtn = ({ id }) => {
     return (
       <Link to={`http://localhost:3000/book/${id}`}>
@@ -11,19 +13,10 @@ const BorrowingTable = ({ user, books }) => {
     );
   };
 
-  let waitingList = [];
+  const { reservations } = useUserContext();
+  const { books } = useBookContext();
 
-  for (let i = 0; i < books.length; i++) {
-    for (let j = 0; j < user.waitingList.length; j++) {
-      if (books[i]._id === user.waitingList[j]) {
-        waitingList.push(books[i]);
-      }
-    }
-  }
-
-  console.log(waitingList);
-
-  if (!waitingList || waitingList.length === 0) {
+  if (!reservations || reservations.length === 0) {
     return (
       <Wrapper>
         <h3>No Books in waiting List...</h3>
@@ -39,12 +32,15 @@ const BorrowingTable = ({ user, books }) => {
             <th>Availability</th>
             <th>Book Link</th>
           </tr>
-          {waitingList.map((book, index) => {
+          {reservations.map((book, index) => {
+            let currentBook = books.find(
+              (bookInList) => (bookInList._id = book.bookId)
+            );
             return (
               <tr className='light' key={index}>
-                <td>{book.bookTitle}</td>
-                <td>{book.availability}</td>
-                <td>{<LinkBtn id={book._id} />}</td>
+                <td>{currentBook.bookTitle}</td>
+                <td>{currentBook.status}</td>
+                <td>{<LinkBtn id={currentBook.bookId} />}</td>
               </tr>
             );
           })}

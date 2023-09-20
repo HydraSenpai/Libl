@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useUserContext } from '../../context/user_context';
+import { Loading } from '../';
 
 const BorrowingTable = ({ user, books }) => {
+  const { isLoading } = useUserContext;
+
   const ReturnBTN = () => {
     return <button className='return-btn'>Return</button>;
   };
@@ -19,6 +23,9 @@ const BorrowingTable = ({ user, books }) => {
     }
   }
 
+  if (isLoading) {
+    return <Loading />;
+  }
   if (!borrowedBooks || borrowedBooks.length === 0) {
     return (
       <Wrapper>
