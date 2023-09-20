@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import profile from '../assets/profileblank.png';
 import DetailsForm from '../components/profile/DetailsForm';
-import Table from '../components/profile/BorrowingTable';
+import BorrowingTable from '../components/profile/BorrowingTable';
 import ReservedTable from '../components/profile/ReservedTable';
 import { useBookContext } from '../context/book_context';
 
@@ -73,7 +73,7 @@ const Dashboard = () => {
             )}
             {displayOption === 'borrowing' && (
               <div className='borrowing'>
-                <Table />
+                <BorrowingTable />
               </div>
             )}
             {displayOption === 'reserved' && (

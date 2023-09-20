@@ -18,6 +18,7 @@ import {
   PROCESS_BEGIN,
   GET_RESERVATIONS_SUCCESS,
   GET_RESERVATIONS_ERROR,
+  PROCESS_END,
 } from '../actions/user_actions';
 import { useBookContext } from './book_context';
 
@@ -166,10 +167,27 @@ const UserProvider = ({ children }) => {
     clearAlert();
   };
 
+  const doingEvent = () => {
+    //simply used to set isLoading true incase anything needs time to load
+    dispatch({ type: PROCESS_BEGIN });
+    clearLoading();
+  };
+
+  const endEvent = () => {
+    //simply used to end isLoading
+    dispatch({ type: PROCESS_END });
+  };
+
   const clearAlert = () => {
     setTimeout(() => {
       dispatch({ type: CLEAR_ALERT });
     }, 3000);
+  };
+
+  const clearLoading = () => {
+    setTimeout(() => {
+      dispatch({ type: PROCESS_END });
+    }, 5000);
   };
 
   const showCustomAlert = ({ message, type }) => {
@@ -236,6 +254,8 @@ const UserProvider = ({ children }) => {
         registerUser,
         logoutUser,
         editUser,
+        doingEvent,
+        endEvent,
       }}
     >
       {children}

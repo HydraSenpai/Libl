@@ -15,6 +15,7 @@ import {
   UPDATE_RESERVE_SUCCESS,
   UPDATE_RESERVE_ERROR,
   PROCESS_BEGIN,
+  PROCESS_END,
   GET_RESERVATIONS_SUCCESS,
   GET_RESERVATIONS_ERROR,
 } from '../actions/user_actions';
@@ -25,6 +26,12 @@ const user_reducer = (state, action) => {
     return {
       ...state,
       isLoading: true,
+    };
+  }
+  if (action.type === PROCESS_END) {
+    return {
+      ...state,
+      isLoading: false,
     };
   }
   if (action.type === REGISTER_USER_BEGIN) {

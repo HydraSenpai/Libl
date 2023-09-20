@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useUserContext } from '../../context/user_context';
 import { useBookContext } from '../../context/book_context';
+import { Loading } from '../';
 
-const BorrowingTable = () => {
+const ReservedTable = () => {
   const LinkBtn = ({ id }) => {
     return (
       <Link to={`http://localhost:3000/book/${id}`}>
@@ -13,44 +14,75 @@ const BorrowingTable = () => {
     );
   };
 
-  const { reservations } = useUserContext();
+  const { reservations, isLoading, doingEvent, endEvent } = useUserContext();
   const { books } = useBookContext();
+  const [reservedList, setReservedList] = useState({});
 
-  if (!reservations || reservations.length === 0) {
+  //gets books that the user is waiting on so we can display them on the table
+  const getReservedBooks = () => {
+    let currentBooks = [];
+    reservations.map((book) => {
+      currentBooks.push(
+        books.find((bookInList) => bookInList._id === book.bookId)
+      );
+    });
+    return currentBooks;
+  };
+
+  useEffect(() => {
+    doingEvent();
+    let reservedLists = getReservedBooks();
+    setReservedList(reservedLists);
+  }, []);
+
+  useEffect(() => {
+    if (reservedList) {
+      console.log(reservedList);
+      endEvent();
+    }
+  }, [reservedList]);
+
+  if (isLoading) {
+    return <Loading />;
+  } else if (
+    !reservations ||
+    reservations.length === 0 ||
+    !reservedList ||
+    reservedList.length === 0 ||
+    !Array.isArray(reservedList)
+  ) {
     return (
       <Wrapper>
         <h3>No Books in waiting List...</h3>
       </Wrapper>
     );
+  } else {
+    return (
+      <Wrapper>
+        <table cellSpacing='0'>
+          <tbody>
+            <tr>
+              <th>Book Name</th>
+              <th>Availability</th>
+              <th>Book Link</th>
+            </tr>
+            {reservedList.map((bookInList) => {
+              return (
+                <tr className='light'>
+                  <td>{bookInList.bookTitle}</td>
+                  <td>{bookInList.status}</td>
+                  <td>{<LinkBtn id={bookInList.bookId} />}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </Wrapper>
+    );
   }
-  return (
-    <Wrapper>
-      <table cellSpacing='0'>
-        <tbody>
-          <tr>
-            <th>Book Name</th>
-            <th>Availability</th>
-            <th>Book Link</th>
-          </tr>
-          {reservations.map((book, index) => {
-            let currentBook = books.find(
-              (bookInList) => (bookInList._id = book.bookId)
-            );
-            return (
-              <tr className='light' key={index}>
-                <td>{currentBook.bookTitle}</td>
-                <td>{currentBook.status}</td>
-                <td>{<LinkBtn id={currentBook.bookId} />}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </Wrapper>
-  );
 };
 
-export default BorrowingTable;
+export default ReservedTable;
 
 const Wrapper = styled.div`
   table {

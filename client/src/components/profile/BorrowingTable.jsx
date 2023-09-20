@@ -1,32 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useUserContext } from '../../context/user_context';
 import { Loading } from '../';
+import { useBookContext } from '../../context/book_context';
 
-const BorrowingTable = ({ user, books }) => {
-  const { isLoading } = useUserContext;
-
+const BorrowingTable = () => {
   const ReturnBTN = () => {
     return <button className='return-btn'>Return</button>;
   };
 
-  let borrowedBooks = [];
+  const { reservations, isLoading, doingEvent, endEvent } = useUserContext();
+  const { books } = useBookContext();
+  const [reservedList, setReservedList] = useState({});
 
-  for (let i = 0; i < books.length; i++) {
-    for (let j = 0; j < user.booksBorrowed.length; j++) {
-      if (books[i]._id === user.booksBorrowed[j].bookId) {
-        borrowedBooks.push({
-          ...books[i],
-          dateBorrowed: user.booksBorrowed[j].dateNow,
-        });
-      }
+  //gets books that the user is waiting on so we can display them on the table
+  const getReservedBooks = () => {
+    let currentBooks = [];
+    reservations.map((book) => {
+      currentBooks.push(
+        books.find((bookInList) => (bookInList._id = book.bookId))
+      );
+    });
+    return currentBooks;
+  };
+
+  useEffect(() => {
+    doingEvent();
+    let reservedLists = getReservedBooks();
+    setReservedList(reservedLists);
+  }, []);
+
+  useEffect(() => {
+    if (reservedList) {
+      console.log(reservedList);
+      endEvent();
     }
-  }
+  }, [reservedList]);
 
   if (isLoading) {
     return <Loading />;
   }
-  if (!borrowedBooks || borrowedBooks.length === 0) {
+  if (!reservations || reservations.length === 0) {
     return (
       <Wrapper>
         <h3>No Books reserved...</h3>
@@ -43,7 +57,7 @@ const BorrowingTable = ({ user, books }) => {
             <th>Days Borrowed</th>
             <th>Return</th>
           </tr>
-          {borrowedBooks.map((book, index) => {
+          {reservations.map((book, index) => {
             var borrowedDT = new Date(book.dateBorrowed);
             var now = Date.now();
             var nowDT = new Date(now);
