@@ -9,7 +9,8 @@ const BorrowingTable = () => {
     return <button className='return-btn'>Return</button>;
   };
 
-  const { reservations, isLoading, doingEvent, endEvent } = useUserContext();
+  const { reservations, isLoading, doingEvent, endEvent, getUserReservations } =
+    useUserContext();
   const { books } = useBookContext();
   const [reservedList, setReservedList] = useState({});
 
@@ -25,6 +26,10 @@ const BorrowingTable = () => {
     }
     return currentBooks;
   };
+
+  useEffect(() => {
+    getUserReservations();
+  }, []);
 
   useEffect(() => {
     doingEvent();

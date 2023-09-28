@@ -33,11 +33,14 @@ const ReservedTable = () => {
   };
 
   useEffect(() => {
-    doingEvent();
     getUserReservations();
+  }, []);
+
+  useEffect(() => {
+    doingEvent();
     let reservedLists = getReservedBooks();
     setReservedList(reservedLists);
-  }, []);
+  }, [reservations, books]);
 
   useEffect(() => {
     if (reservedList) {
