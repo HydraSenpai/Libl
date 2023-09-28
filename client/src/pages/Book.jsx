@@ -26,7 +26,7 @@ const Book = () => {
     displayAlert,
   } = useBookContext();
 
-  const { user, updateUserReserving, updateUserWaitingList } = useUserContext();
+  const { user } = useUserContext();
 
   const { id: bookId } = useParams();
   const [book, setBook] = useState([]);

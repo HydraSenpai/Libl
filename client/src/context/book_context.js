@@ -19,7 +19,6 @@ import {
   CLEAR_ALERT,
 } from '../actions/book_actions';
 import { useUserContext } from '../context/user_context';
-import { GET_RESERVATIONS_ERROR } from '../actions/user_actions';
 
 const initialState = {
   books: [],
@@ -35,7 +34,7 @@ const BookContext = React.createContext();
 
 const BookProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { token, user, logoutUser, getUserReservations } = useUserContext();
+  const { token, user, logoutUser, checkUserReservations } = useUserContext();
 
   const authFetch = axios.create({
     baseURL: '/api/v1',
@@ -86,7 +85,7 @@ const BookProvider = ({ children }) => {
         type: UPDATE_WAITINGLIST_SUCCESS,
       });
       getAllBooks();
-      getUserReservations();
+      checkUserReservations();
     } catch (error) {
       console.log(error);
       dispatch({ type: UPDATE_WAITINGLIST_ERROR });
@@ -119,7 +118,7 @@ const BookProvider = ({ children }) => {
       });
       getBookReservation(bookId);
       getSingleBook(bookId);
-      getUserReservations();
+      checkUserReservations();
     } catch (error) {
       console.log(error);
       dispatch({ type: CREATE_RESERVATION_ERROR });

@@ -164,8 +164,8 @@ const createReservation = async (req, res) => {
     }
     //add entry
     const reservation = await Reservation.create({
-      bookId,
-      userId,
+      bookId: bookId,
+      userId: userId,
       reservationDate: date,
       queueNumber: maxQueueNumber,
       status: statusTemp,

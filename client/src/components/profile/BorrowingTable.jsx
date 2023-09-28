@@ -16,11 +16,13 @@ const BorrowingTable = () => {
   //gets books that the user is waiting on so we can display them on the table
   const getReservedBooks = () => {
     let currentBooks = [];
-    reservations.map((book) => {
-      currentBooks.push(
-        books.find((bookInList) => (bookInList._id = book.bookId))
-      );
-    });
+    if (reservations) {
+      reservations.forEach((book) => {
+        currentBooks.push(
+          books.find((bookInList) => bookInList._id === book.bookId)
+        );
+      });
+    }
     return currentBooks;
   };
 
@@ -28,7 +30,7 @@ const BorrowingTable = () => {
     doingEvent();
     let reservedLists = getReservedBooks();
     setReservedList(reservedLists);
-  }, []);
+  }, [reservations, books]);
 
   useEffect(() => {
     if (reservedList) {

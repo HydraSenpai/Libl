@@ -22,11 +22,13 @@ const ReservedTable = () => {
   //gets books that the user is waiting on so we can display them on the table
   const getReservedBooks = () => {
     let currentBooks = [];
-    reservations.map((book) => {
-      currentBooks.push(
-        books.find((bookInList) => bookInList._id === book.bookId)
-      );
-    });
+    if (reservations) {
+      reservations.forEach((book) => {
+        currentBooks.push(
+          books.find((bookInList) => bookInList._id === book.bookId)
+        );
+      });
+    }
     return currentBooks;
   };
 
@@ -68,15 +70,16 @@ const ReservedTable = () => {
               {/* <th>Availability</th> */}
               <th>Book Link</th>
             </tr>
-            {reservedList.map((bookInList) => {
-              return (
-                <tr className='light'>
-                  <td>{bookInList.bookTitle}</td>
-                  {/* <td>{bookInList.status}</td> */}
-                  <td>{<LinkBtn id={bookInList._id} />}</td>
-                </tr>
-              );
-            })}
+            {reservedList[0] &&
+              reservedList.map((bookInList) => {
+                return (
+                  <tr className='light'>
+                    <td>{bookInList.bookTitle}</td>
+                    {/* <td>{bookInList.status}</td> */}
+                    <td>{<LinkBtn id={bookInList._id} />}</td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </Wrapper>

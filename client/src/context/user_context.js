@@ -54,6 +54,12 @@ const UserProvider = ({ children }) => {
     }
   }, [user]);
 
+  const checkUserReservations = () => {
+    if (user) {
+      getUserReservations();
+    }
+  };
+
   const addUserToLocalStorage = ({ user, token }) => {
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('token', token);
@@ -170,7 +176,7 @@ const UserProvider = ({ children }) => {
   const doingEvent = () => {
     //simply used to set isLoading true incase anything needs time to load
     dispatch({ type: PROCESS_BEGIN });
-    clearLoading();
+    clearLoading(5000);
   };
 
   const endEvent = () => {
@@ -184,10 +190,10 @@ const UserProvider = ({ children }) => {
     }, 3000);
   };
 
-  const clearLoading = () => {
+  const clearLoading = (time) => {
     setTimeout(() => {
       dispatch({ type: PROCESS_END });
-    }, 5000);
+    }, time);
   };
 
   const showCustomAlert = ({ message, type }) => {
@@ -257,6 +263,7 @@ const UserProvider = ({ children }) => {
         doingEvent,
         endEvent,
         getUserReservations,
+        checkUserReservations,
       }}
     >
       {children}
